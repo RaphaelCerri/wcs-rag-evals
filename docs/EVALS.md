@@ -20,7 +20,7 @@ Cada caso registra:
 
 O conjunto inicial é pequeno e serve para validar contratos. Antes de publicar métricas finais, deve crescer e receber revisão humana sem usar respostas do sistema como rótulo.
 
-## Métricas planejadas
+## Métricas
 
 ### Retrieval
 
@@ -28,6 +28,10 @@ O conjunto inicial é pequeno e serve para validar contratos. Antes de publicar 
 - Precision@k
 - Mean Reciprocal Rank
 - nDCG@k
+
+O baseline BM25 calcula todas as métricas em `k = 1, 3, 5, 10`, além de MRR@10. A avaliação agrega resultados para o conjunto completo, splits `dev` e `test` e idioma. Casos não respondíveis são excluídos das métricas de retrieval porque não possuem documentos relevantes; eles serão avaliados na camada de geração e recusa.
+
+Resultados publicados: [`evals/results/bm25-v0.1.md`](../evals/results/bm25-v0.1.md).
 
 ### Geração
 
@@ -51,4 +55,3 @@ O corpus contém documentação com níveis diferentes de autoridade. Um ADR pod
 ## Regression gate
 
 Os limites só serão definidos depois do primeiro baseline. O gate não será calibrado para fazer a implementação atual passar. Uma regressão deliberada deverá falhar o CI como teste do próprio gate.
-

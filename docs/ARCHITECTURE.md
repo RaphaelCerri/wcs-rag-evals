@@ -23,7 +23,7 @@ Responsável apenas por adquirir documentos permitidos, preservar proveniência 
 
 ### Retrieval
 
-Recebe uma pergunta e retorna documentos ou chunks com score. A primeira implementação será lexical. Vetores, busca híbrida e reranker entram como estratégias comparáveis, não como substituições silenciosas.
+Recebe uma pergunta e retorna documentos ou chunks com score. A implementação inicial usa BM25 próprio sobre chunks e agrega cada documento pelo maior score de seus chunks. Vetores, busca híbrida e reranker entram como estratégias comparáveis, não como substituições silenciosas.
 
 ### Geração
 
@@ -39,18 +39,25 @@ Compara resultados contra o golden set. Métricas determinísticas de retrieval 
 - Pydantic para contratos externos.
 - JSONL para datasets versionáveis e revisáveis em diff.
 - YAML para manifesto humano de fontes.
-- Conteúdo bruto e relatórios locais fora do Git.
+- Conteúdo bruto e índices reconstruíveis fora do Git; métricas agregadas e rankings publicados em `evals/results/`.
 - Revisões de corpus sempre fixadas por SHA completo.
-- Nenhuma chave de API é necessária na Fase 0.
+- Nenhuma chave de API é necessária nas Fases 0 e 1.
+
+## Decisões da Fase 1
+
+- BM25 implementado no projeto, sem serviço ou índice externo.
+- Tokenização Unicode, case-insensitive, sem stemming ou tradução.
+- Markdown separado por headings e janelas de até 220 palavras com overlap de 40.
+- OpenAPI separado por operação HTTP e componente, preservando contratos, schemas e metadados relevantes.
+- Ranking avaliado em nível de documento, compatível com os rótulos do golden set.
+- Score do documento definido pelo melhor chunk, evitando somar vantagem por tamanho do arquivo.
+- Empates resolvidos por identificador estável para garantir reprodução.
 
 ## Próximas decisões
 
-- BM25 puro ou PostgreSQL full-text como baseline lexical.
-- unidade de chunking e estratégia para Markdown/OpenAPI;
 - modelo de embedding;
 - pgvector local ou Supabase para execução pública;
 - rank fusion e reranker;
 - provedor e protocolo de geração.
 
 Cada decisão será tomada depois da métrica anterior existir.
-

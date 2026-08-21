@@ -24,6 +24,8 @@ dev = [
 [project.scripts]
 wcs-fetch-corpus = "wcs_rag_evals.fetch_corpus:main"
 wcs-validate-evals = "wcs_rag_evals.validate_dataset:main"
+wcs-build-index = "wcs_rag_evals.build_index:main"
+wcs-eval-bm25 = "wcs_rag_evals.evaluate_bm25:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wcs_rag_evals"]
@@ -38,4 +40,3 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
-

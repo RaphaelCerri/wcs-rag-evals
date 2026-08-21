@@ -6,16 +6,33 @@ O domínio escolhido é logística e automação de armazéns. O corpus inicial 
 
 ## Estado atual
 
-**Fase 0, fundação de avaliação.** Esta entrega contém:
+**Fase 1, baseline lexical medido.** O projeto já contém:
 
 - manifesto reproduzível de fontes e revisões;
 - ingestão allowlist, sem republicar o corpus de terceiro;
 - hashes SHA-256 de cada documento coletado;
 - golden set inicial com respostas, fatos obrigatórios e claims proibidos;
 - validação tipada dos contratos de fonte e avaliação;
-- testes de integridade e rastreabilidade.
+- chunking determinístico e sensível a headings para Markdown e OpenAPI;
+- implementação própria de BM25 com ranking por documento;
+- Recall@k, Precision@k, MRR@10 e nDCG@k calculados por caso e por split;
+- relatório reproduzível com configuração, hashes, rankings e scores.
 
-Ainda não há banco vetorial, embeddings, geração por LLM ou API. Esses componentes entram somente depois de existir um baseline lexical medido.
+Ainda não há banco vetorial, embeddings, geração por LLM ou API. Esses componentes entram nas próximas fases e precisarão superar este baseline sob os mesmos casos.
+
+## Resultado do baseline
+
+O BM25 v0.1 indexou **75 documentos em 1.458 chunks** e avaliou os 17 casos respondíveis do golden set. O caso não respondível foi preservado para a futura avaliação de recusa, mas não entrou nas métricas de retrieval por não possuir documento relevante.
+
+| Split | Casos | Recall@1 | Recall@5 | Recall@10 | MRR@10 | nDCG@10 |
+|---|---:|---:|---:|---:|---:|---:|
+| Todos | 17 | 0,338 | **0,819** | **0,892** | **0,696** | **0,718** |
+| Dev | 12 | 0,375 | 0,875 | 0,903 | 0,681 | 0,708 |
+| Test | 5 | 0,250 | 0,683 | 0,867 | 0,733 | 0,742 |
+
+O recorte em inglês atingiu Recall@5 de 0,849. O primeiro caso cross-lingual, com pergunta em português e corpus majoritariamente em inglês, atingiu apenas 0,333. Essa diferença registra uma limitação lexical concreta que embeddings e busca híbrida deverão resolver, sem alterar o conjunto de teste depois de observar o resultado.
+
+Veja o [relatório legível](evals/results/bm25-v0.1.md) ou o [artefato completo em JSON](evals/results/bm25-v0.1.json).
 
 ## Por que avaliação primeiro
 
@@ -47,6 +64,8 @@ python -m venv .venv
 python -m pip install -e ".[dev]"
 wcs-fetch-corpus
 wcs-validate-evals
+wcs-build-index
+wcs-eval-bm25
 pytest
 ```
 
@@ -55,7 +74,7 @@ pytest
 | Fase | Entrega | Gate |
 |---|---|---|
 | 0 | Corpus fixo, golden set e contratos | dataset íntegro e reproduzível |
-| 1 | Baseline lexical BM25 | métricas de retrieval publicadas |
+| 1 | Baseline lexical BM25 | concluída: métricas de retrieval publicadas |
 | 2 | Embeddings e pgvector | superar baseline dentro do orçamento |
 | 3 | Retrieval híbrido e rank fusion | ganho consistente em dev e test |
 | 4 | Reranker | melhoria maior que custo e latência adicionais |
@@ -76,4 +95,3 @@ O projeto foi concebido, especificado e validado por Raphael Caveagna com assist
 ## Licença
 
 O código deste repositório usa licença MIT. O openWCS é uma fonte externa sob AGPL-3.0; sua documentação não é relicenciada nem republicada aqui. Consulte o manifesto e a licença original antes de reutilizar o corpus.
-
