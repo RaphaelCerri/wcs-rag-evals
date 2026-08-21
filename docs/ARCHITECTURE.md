@@ -8,7 +8,7 @@ O projeto separa corpus, retrieval, geração e avaliação. Uma camada pode ser
 fontes fixadas
   -> coletor + proveniência + hashes
   -> parser e chunking versionados
-  -> índice lexical / índice vetorial
+  -> BM25 local / PostgreSQL + pgvector
   -> retrievers independentes
   -> rank fusion e reranker
   -> geração com citações
@@ -41,7 +41,7 @@ Compara resultados contra o golden set. Métricas determinísticas de retrieval 
 - YAML para manifesto humano de fontes.
 - Conteúdo bruto e índices reconstruíveis fora do Git; métricas agregadas e rankings publicados em `evals/results/`.
 - Revisões de corpus sempre fixadas por SHA completo.
-- Nenhuma chave de API é necessária nas Fases 0 e 1.
+- Nenhuma chave de API é necessária nas Fases 0, 1 e 2.
 
 ## Decisões da Fase 1
 
@@ -53,11 +53,22 @@ Compara resultados contra o golden set. Métricas determinísticas de retrieval 
 - Score do documento definido pelo melhor chunk, evitando somar vantagem por tamanho do arquivo.
 - Empates resolvidos por identificador estável para garantir reprodução.
 
+## Decisões da Fase 2
+
+- `multilingual-e5-small` fixado por SHA, com 384 dimensões e execução local em CPU.
+- Prefixos `query:` e `passage:` aplicados explicitamente conforme o treinamento do modelo.
+- Embeddings normalizados antes da persistência.
+- PostgreSQL 17 com pgvector 0.8.6 em imagem Docker fixada.
+- Porta do banco exposta apenas em `127.0.0.1`.
+- Busca exata por cosine distance na medição atual, evitando introduzir erro aproximado em apenas 1.458 vetores.
+- Índice HNSW criado para demonstrar o caminho de escala, mas não atribuído falsamente aos resultados atuais.
+- Cache local retomável por lote, evitando recalcular embeddings depois de interrupções.
+- Mesmo chunking, golden set, top-k e agregação do BM25 para manter a comparação controlada.
+
 ## Próximas decisões
 
-- modelo de embedding;
-- pgvector local ou Supabase para execução pública;
-- rank fusion e reranker;
+- método de rank fusion;
+- reranker;
 - provedor e protocolo de geração.
 
 Cada decisão será tomada depois da métrica anterior existir.

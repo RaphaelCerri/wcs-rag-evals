@@ -1,0 +1,2377 @@
+{
+  "schema_version": "1.0",
+  "baseline": "dense-e5-small-v0.1",
+  "configuration": {
+    "retriever": {
+      "name": "dense",
+      "model_id": "intfloat/multilingual-e5-small",
+      "model_revision": "fd1525a9fd15316a2d503bf26ab031a61d056e98",
+      "dimensions": 384,
+      "distance": "cosine",
+      "normalized_embeddings": true,
+      "query_prefix": "query: ",
+      "document_prefix": "passage: "
+    },
+    "vector_database": {
+      "engine": "PostgreSQL 17",
+      "extension": "pgvector 0.8.6",
+      "search_mode": "exact",
+      "ann_index_available": "HNSW",
+      "m": 16,
+      "ef_construction": 64
+    },
+    "chunking": {
+      "strategy": "heading-aware-word-window",
+      "max_words": 220,
+      "overlap_words": 40
+    },
+    "ranking_level": "document",
+    "document_aggregation": "maximum_chunk_score",
+    "candidate_chunks": 100,
+    "k_values": [
+      1,
+      3,
+      5,
+      10
+    ]
+  },
+  "corpus": {
+    "manifest_sha256": "3b8ad0a04a9b7279d90df6b8f6c43ea5db49b6be2697d9c3efc1f497c0a108fd",
+    "document_count": 75,
+    "sources": [
+      {
+        "id": "openwcs-repo",
+        "repository": "https://github.com/brettljausn-ai/openwcs.git",
+        "revision": "0aca8e6719f03b76044d84bfd3603e5a6689b762",
+        "license": "AGPL-3.0-only",
+        "authority": "source_of_truth"
+      },
+      {
+        "id": "openwcs-wiki",
+        "repository": "https://github.com/brettljausn-ai/openwcs.wiki.git",
+        "revision": "47ebafd3fa2966926bcc3b7589807ecc9d4171a8",
+        "license": "AGPL-3.0-only",
+        "authority": "explanatory"
+      }
+    ],
+    "chunk_count": 1458
+  },
+  "dataset": {
+    "path": "evals/datasets/golden-v0.1.jsonl",
+    "sha256": "15ee90921cdcb87cc8a0e10434e8633a176971c734e6b5936d8cc524858ae77a",
+    "case_count": 18,
+    "answerable_case_count": 17,
+    "unanswerable_case_count": 1
+  },
+  "comparison": {
+    "baseline": "bm25-v0.1",
+    "baseline_report_sha256": "182dcd7214fec57458b762e43d202e67e322355942f99ec1e318ade25736e2c4",
+    "metric_deltas": {
+      "all": {
+        "recall_at_1": -0.039215,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": -0.024509,
+        "precision_at_3": -0.019608,
+        "ndcg_at_3": -0.044959,
+        "recall_at_5": -0.034313,
+        "precision_at_5": -0.011765,
+        "ndcg_at_5": -0.044095,
+        "recall_at_10": 0.053921,
+        "precision_at_10": 0.011765,
+        "ndcg_at_10": -0.00863,
+        "mrr_at_10": -0.007843
+      },
+      "dev": {
+        "recall_at_1": -0.055556,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.027778,
+        "precision_at_3": 0.027778,
+        "ndcg_at_3": -0.006781,
+        "recall_at_5": -0.055556,
+        "precision_at_5": -0.016667,
+        "ndcg_at_5": -0.048553,
+        "recall_at_10": 0.041666,
+        "precision_at_10": 0.008333,
+        "ndcg_at_10": -0.00905,
+        "mrr_at_10": -0.011111
+      },
+      "language:en": {
+        "recall_at_1": -0.041667,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": -0.026041,
+        "precision_at_3": -0.020833,
+        "ndcg_at_3": -0.04777,
+        "recall_at_5": -0.057291,
+        "precision_at_5": -0.025,
+        "ndcg_at_5": -0.059483,
+        "recall_at_10": 0.036458,
+        "precision_at_10": 0.00625,
+        "ndcg_at_10": -0.021801,
+        "mrr_at_10": -0.008333
+      },
+      "language:pt-BR": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.0,
+        "precision_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "recall_at_5": 0.333334,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.202108,
+        "recall_at_10": 0.333333,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 0.202107,
+        "mrr_at_10": 0.0
+      },
+      "test": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": -0.15,
+        "precision_at_3": -0.133333,
+        "ndcg_at_3": -0.136587,
+        "recall_at_5": 0.016667,
+        "precision_at_5": 0.0,
+        "ndcg_at_5": -0.033396,
+        "recall_at_10": 0.083333,
+        "precision_at_10": 0.02,
+        "ndcg_at_10": -0.007621,
+        "mrr_at_10": 0.0
+      }
+    }
+  },
+  "summaries": {
+    "all": {
+      "case_count": 17,
+      "recall_at_1": 0.29902,
+      "precision_at_1": 0.529412,
+      "ndcg_at_1": 0.529412,
+      "recall_at_3": 0.661765,
+      "precision_at_3": 0.372549,
+      "ndcg_at_3": 0.578092,
+      "recall_at_5": 0.784314,
+      "precision_at_5": 0.282353,
+      "ndcg_at_5": 0.637662,
+      "recall_at_10": 0.946078,
+      "precision_at_10": 0.182353,
+      "ndcg_at_10": 0.709681,
+      "mrr_at_10": 0.688235
+    },
+    "dev": {
+      "case_count": 12,
+      "recall_at_1": 0.319444,
+      "precision_at_1": 0.5,
+      "ndcg_at_1": 0.5,
+      "recall_at_3": 0.736111,
+      "precision_at_3": 0.361111,
+      "ndcg_at_3": 0.606321,
+      "recall_at_5": 0.819444,
+      "precision_at_5": 0.25,
+      "ndcg_at_5": 0.645854,
+      "recall_at_10": 0.944444,
+      "precision_at_10": 0.15,
+      "ndcg_at_10": 0.699287,
+      "mrr_at_10": 0.669444
+    },
+    "language:en": {
+      "case_count": 16,
+      "recall_at_1": 0.317708,
+      "precision_at_1": 0.5625,
+      "ndcg_at_1": 0.5625,
+      "recall_at_3": 0.682292,
+      "precision_at_3": 0.375,
+      "ndcg_at_3": 0.599557,
+      "recall_at_5": 0.791667,
+      "precision_at_5": 0.275,
+      "ndcg_at_5": 0.650219,
+      "recall_at_10": 0.942708,
+      "precision_at_10": 0.175,
+      "ndcg_at_10": 0.716292,
+      "mrr_at_10": 0.710417
+    },
+    "language:pt-BR": {
+      "case_count": 1,
+      "recall_at_1": 0.0,
+      "precision_at_1": 0.0,
+      "ndcg_at_1": 0.0,
+      "recall_at_3": 0.333333,
+      "precision_at_3": 0.333333,
+      "ndcg_at_3": 0.234639,
+      "recall_at_5": 0.666667,
+      "precision_at_5": 0.4,
+      "ndcg_at_5": 0.436747,
+      "recall_at_10": 1.0,
+      "precision_at_10": 0.3,
+      "ndcg_at_10": 0.603907,
+      "mrr_at_10": 0.333333
+    },
+    "test": {
+      "case_count": 5,
+      "recall_at_1": 0.25,
+      "precision_at_1": 0.6,
+      "ndcg_at_1": 0.6,
+      "recall_at_3": 0.483333,
+      "precision_at_3": 0.4,
+      "ndcg_at_3": 0.510341,
+      "recall_at_5": 0.7,
+      "precision_at_5": 0.36,
+      "ndcg_at_5": 0.618,
+      "recall_at_10": 0.95,
+      "precision_at_10": 0.26,
+      "ndcg_at_10": 0.734627,
+      "mrr_at_10": 0.733333
+    }
+  },
+  "cases": [
+    {
+      "id": "wcs-dev-001",
+      "question": "Where does openWCS sit between enterprise systems and warehouse equipment, and what responsibility belongs on each side?",
+      "split": "dev",
+      "language": "en",
+      "category": "architecture",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/README.md",
+        "openwcs-wiki/Architecture.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/SECURITY.md",
+          "score": 0.884445,
+          "best_chunk_id": "openwcs-repo/SECURITY.md::0000::03928acd2a43"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.883823,
+          "best_chunk_id": "openwcs-wiki/Home.md::0000::4a899ce1ddec"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.880141,
+          "best_chunk_id": "openwcs-repo/build.md::0001::cdf6bbd51d53"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.871672,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0000::dbb3f946f001"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.869712,
+          "best_chunk_id": "openwcs-repo/README.md::0000::87585a71d728"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.854728,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0092::41d3ea46127e"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.853352,
+          "best_chunk_id": "openwcs-wiki/Architecture.md::0000::4da4dd655885"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.851054,
+          "best_chunk_id": "openwcs-wiki/Slotting-and-Replenishment.md::0000::9bc01a98173b"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Deployment-Guide.md",
+          "score": 0.848498,
+          "best_chunk_id": "openwcs-wiki/Deployment-Guide.md::0028::aec5dfdbea65"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/contracts/openapi/notification.yaml",
+          "score": 0.848188,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/notification.yaml::0000::877def43c370"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.0,
+        "precision_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "recall_at_5": 0.5,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.237198,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.44158,
+        "mrr_at_10": 0.2
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.306574,
+          "recall_at_10": 0.5,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.306574,
+          "mrr_at_10": 0.333333
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": -0.5,
+          "precision_at_3": -0.333333,
+          "ndcg_at_3": -0.306574,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": -0.069376,
+          "recall_at_10": 0.5,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.135006,
+          "mrr_at_10": -0.133333
+        }
+      },
+      "first_relevant_rank": 5
+    },
+    {
+      "id": "wcs-dev-002",
+      "question": "Why are batch, lot and serial-unit records owned by inventory instead of master data in openWCS?",
+      "split": "dev",
+      "language": "en",
+      "category": "inventory",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0001-inventory-data-ownership.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+          "score": 0.923803,
+          "best_chunk_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md::0002::6a3561a668b6"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.905729,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0075::bd90b39b9695"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.90075,
+          "best_chunk_id": "openwcs-repo/README.md::0027::844febef37c5"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.900056,
+          "best_chunk_id": "openwcs-repo/build.md::0030::b0952282944c"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.89832,
+          "best_chunk_id": "openwcs-wiki/Inbound-and-Inventory.md::0007::0fd39a94c415"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.893033,
+          "best_chunk_id": "openwcs-wiki/Services.md::0008::ea28e72692db"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.883352,
+          "best_chunk_id": "openwcs-wiki/Home.md::0000::4a899ce1ddec"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.878449,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0025::13ee4cecbacb"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.878109,
+          "best_chunk_id": "openwcs-wiki/Slotting-and-Replenishment.md::0000::9bc01a98173b"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Areas.md",
+          "score": 0.875834,
+          "best_chunk_id": "openwcs-wiki/Areas.md::0000::a1bde4934e69"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 1.0,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-003",
+      "question": "What happens to reservations when one line prevents an outbound order from being fully allocated?",
+      "split": "dev",
+      "language": "en",
+      "category": "outbound",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.868867,
+          "best_chunk_id": "openwcs-wiki/Outbound-Flow.md::0004::fe3a6da9a7d4"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/services/allocation/README.md",
+          "score": 0.864944,
+          "best_chunk_id": "openwcs-repo/services/allocation/README.md::0000::3ef30ac3cc79"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md",
+          "score": 0.860485,
+          "best_chunk_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md::0006::752a674ee208"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Areas.md",
+          "score": 0.855429,
+          "best_chunk_id": "openwcs-wiki/Areas.md::0006::67525e842968"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.852483,
+          "best_chunk_id": "openwcs-wiki/Inbound-and-Inventory.md::0007::0fd39a94c415"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.851906,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0096::487a4091fdec"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/contracts/openapi/allocation.yaml",
+          "score": 0.851574,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/allocation.yaml::0003::939f941be600"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Mobile-Process-Designer.md",
+          "score": 0.850055,
+          "best_chunk_id": "openwcs-wiki/Mobile-Process-Designer.md::0014::66dfff525aa7"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.849966,
+          "best_chunk_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md::0001::0545527faaed"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.849736,
+          "best_chunk_id": "openwcs-wiki/Goods-to-Person-Stations.md::0014::1524ed79daf6"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.5,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.5,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 0.5,
+        "mrr_at_10": 0.333333
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.5,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.5,
+          "mrr_at_10": 0.333333
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-dev-004",
+      "question": "How do APP cubing and ONE_TO_ONE cubing differ, and what does APP cubing deliberately not solve?",
+      "split": "dev",
+      "language": "en",
+      "category": "outbound",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-wiki/Hardware-Visualisation.md",
+          "score": 0.874306,
+          "best_chunk_id": "openwcs-wiki/Hardware-Visualisation.md::0010::9e321f54c935"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.873663,
+          "best_chunk_id": "openwcs-wiki/Goods-to-Person-Stations.md::0023::276618ea0bce"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md",
+          "score": 0.868022,
+          "best_chunk_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md::0005::2fc2de4a01b4"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.86692,
+          "best_chunk_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md::0005::e82960c2bf99"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.866396,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0027::fc03dada46cd"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.865544,
+          "best_chunk_id": "openwcs-wiki/Outbound-Flow.md::0003::b728df7a20e0"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md",
+          "score": 0.863311,
+          "best_chunk_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md::0008::6b7d56d56350"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md",
+          "score": 0.863067,
+          "best_chunk_id": "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md::0001::c7168578da5b"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.862494,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0126::05bce986fe8a"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Process-Designer.md",
+          "score": 0.862236,
+          "best_chunk_id": "openwcs-wiki/Process-Designer.md::0021::52e21aceb657"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.5,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.5,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 0.5,
+        "mrr_at_10": 0.333333
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.63093,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.63093,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.63093,
+          "mrr_at_10": 0.5
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": -0.13093,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": -0.13093,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.13093,
+          "mrr_at_10": -0.166667
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-dev-005",
+      "question": "How does the put-away scorer reconcile lane consolidation, aisle redundancy, velocity and balance?",
+      "split": "dev",
+      "language": "en",
+      "category": "slotting",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.880352,
+          "best_chunk_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md::0002::1c8497255d3d"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.876946,
+          "best_chunk_id": "openwcs-wiki/Slotting-and-Replenishment.md::0001::5e36ce648ae1"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.852067,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0021::e8c0ca6a706e"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.845174,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0031::f1d82768c862"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Hardware-Visualisation.md",
+          "score": 0.84084,
+          "best_chunk_id": "openwcs-wiki/Hardware-Visualisation.md::0007::8f0ee5b5838f"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.837528,
+          "best_chunk_id": "openwcs-wiki/Services.md::0027::5af7e3074af5"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Transport-Overview.md",
+          "score": 0.83567,
+          "best_chunk_id": "openwcs-wiki/Transport-Overview.md::0007::50fa8f03f9ad"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+          "score": 0.834374,
+          "best_chunk_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md::0005::c271acfd6b3e"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+          "score": 0.833411,
+          "best_chunk_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md::0011::9f5536260f41"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.831819,
+          "best_chunk_id": "openwcs-wiki/Outbound-Flow.md::0014::25acbd664817"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 1.0,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-006",
+      "question": "What priorities and triggers are used for manual pick-face replenishment?",
+      "split": "dev",
+      "language": "en",
+      "category": "slotting",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+        "openwcs-wiki/Slotting-and-Replenishment.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.87122,
+          "best_chunk_id": "openwcs-wiki/Slotting-and-Replenishment.md::0003::ee89322692b5"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.820138,
+          "best_chunk_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md::0001::0545527faaed"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.811597,
+          "best_chunk_id": "openwcs-wiki/Services.md::0027::5af7e3074af5"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Areas.md",
+          "score": 0.810729,
+          "best_chunk_id": "openwcs-wiki/Areas.md::0005::4fcf313ceb59"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+          "score": 0.808157,
+          "best_chunk_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md::0003::5070d8a6f2d5"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.806089,
+          "best_chunk_id": "openwcs-wiki/Goods-to-Person-Stations.md::0023::276618ea0bce"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.805667,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0036::70fac668d6b4"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.804691,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0023::4b8b7dd4dbef"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Mobile-Process-Designer.md",
+          "score": 0.8028,
+          "best_chunk_id": "openwcs-wiki/Mobile-Process-Designer.md::0011::e6591537055f"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.800905,
+          "best_chunk_id": "openwcs-repo/README.md::0006::ac5ba68a7653"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.386853,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.624051,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.624051,
+          "mrr_at_10": 0.5
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.375949,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.375949,
+          "mrr_at_10": 0.5
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-007",
+      "question": "How does a GTP work cycle use one stock handling unit for several orders, and what happens on a short pick?",
+      "split": "dev",
+      "language": "en",
+      "category": "process",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+        "openwcs-wiki/Goods-to-Person-Stations.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+          "score": 0.91293,
+          "best_chunk_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md::0003::5070d8a6f2d5"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.900624,
+          "best_chunk_id": "openwcs-wiki/Goods-to-Person-Stations.md::0022::0bec6bd603de"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.900211,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0114::97cffc67dc71"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.890452,
+          "best_chunk_id": "openwcs-wiki/Services.md::0009::ba0829fdf59e"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/contracts/openapi/gtp.yaml",
+          "score": 0.890282,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/gtp.yaml::0000::adeb922915cf"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.888156,
+          "best_chunk_id": "openwcs-wiki/Outbound-Flow.md::0004::fe3a6da9a7d4"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.887491,
+          "best_chunk_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md::0001::0545527faaed"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.887066,
+          "best_chunk_id": "openwcs-repo/README.md::0007::3d4a602f5b63"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.886645,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0021::89ae0c082922"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.885335,
+          "best_chunk_id": "openwcs-wiki/Slotting-and-Replenishment.md::0016::2be303b34a9b"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.543771,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.543771,
+          "mrr_at_10": 0.333333
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.693426,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.456229,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.456229,
+          "mrr_at_10": 0.666667
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-008",
+      "question": "Which concurrency mechanisms let scheduled work, loop capacity and stock reservation remain correct across replicas?",
+      "split": "dev",
+      "language": "en",
+      "category": "reliability",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/SCALING.md",
+        "openwcs-wiki/Horizontal-Scaling.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.84121,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0032::03b3913a97d9"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.838188,
+          "best_chunk_id": "openwcs-wiki/Goods-to-Person-Stations.md::0017::c79b41b6c8ee"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/SCALING.md",
+          "score": 0.837203,
+          "best_chunk_id": "openwcs-repo/docs/SCALING.md::0001::1778c228610c"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.836895,
+          "best_chunk_id": "openwcs-wiki/Architecture.md::0001::d58081b75dae"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.836724,
+          "best_chunk_id": "openwcs-repo/README.md::0015::937c1ff3228f"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Horizontal-Scaling.md",
+          "score": 0.836702,
+          "best_chunk_id": "openwcs-wiki/Horizontal-Scaling.md::0001::a5c22c4f029b"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Process-Designer.md",
+          "score": 0.835896,
+          "best_chunk_id": "openwcs-wiki/Process-Designer.md::0028::d23df9b1de4f"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.835025,
+          "best_chunk_id": "openwcs-wiki/Services.md::0030::08503ac6feff"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.834063,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0008::f629733e60db"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/docs/process-designer-spec.md",
+          "score": 0.833595,
+          "best_chunk_id": "openwcs-repo/docs/process-designer-spec.md::0031::4db57ce842d8"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.5,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.306574,
+        "recall_at_5": 0.5,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.306574,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.524981,
+        "mrr_at_10": 0.333333
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": -0.5,
+          "precision_at_1": -1.0,
+          "ndcg_at_1": -1.0,
+          "recall_at_3": -0.5,
+          "precision_at_3": -0.333334,
+          "ndcg_at_3": -0.693426,
+          "recall_at_5": -0.5,
+          "precision_at_5": -0.2,
+          "ndcg_at_5": -0.693426,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.475019,
+          "mrr_at_10": -0.666667
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-dev-009",
+      "question": "In scan-driven conveyance, which component decides routes and which component reports physical progress?",
+      "split": "dev",
+      "language": "en",
+      "category": "equipment",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md",
+        "openwcs-repo/docs/AS-BUILT.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/contracts/openapi/flow-orchestrator.yaml",
+          "score": 0.85552,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/flow-orchestrator.yaml::0017::fc403f79c94d"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md",
+          "score": 0.851917,
+          "best_chunk_id": "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md::0006::61db590a0746"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Transport-Overview.md",
+          "score": 0.84637,
+          "best_chunk_id": "openwcs-wiki/Transport-Overview.md::0006::323af45725c6"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.841833,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0027::fc03dada46cd"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Reporting.md",
+          "score": 0.83521,
+          "best_chunk_id": "openwcs-wiki/Reporting.md::0010::0dcda3b32cb7"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.83354,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0106::7f298fd430a0"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.833224,
+          "best_chunk_id": "openwcs-wiki/Services.md::0020::53b774e0ff01"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/adr/0007-impl-contract.md",
+          "score": 0.832469,
+          "best_chunk_id": "openwcs-repo/docs/adr/0007-impl-contract.md::0020::605069b35bbc"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.831271,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0069::fd3281f0b4a9"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md",
+          "score": 0.831186,
+          "best_chunk_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md::0010::34bda6463214"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.5,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.386853,
+        "recall_at_5": 0.5,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.386853,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.60526,
+        "mrr_at_10": 0.5
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.850345,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.850345,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": -0.5,
+          "precision_at_1": -1.0,
+          "ndcg_at_1": -1.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": -0.226294,
+          "recall_at_5": -0.5,
+          "precision_at_5": -0.2,
+          "ndcg_at_5": -0.463492,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.245085,
+          "mrr_at_10": -0.5
+        }
+      },
+      "first_relevant_rank": 2
+    },
+    {
+      "id": "wcs-dev-010",
+      "question": "Why must a blocker relocation in a double-deep channel stay on the same cellY, and who plans and executes it?",
+      "split": "dev",
+      "language": "en",
+      "category": "equipment",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+        "openwcs-repo/docs/AS-BUILT.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+          "score": 0.901168,
+          "best_chunk_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md::0004::1a2ba8e09346"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.893342,
+          "best_chunk_id": "openwcs-wiki/Slotting-and-Replenishment.md::0017::127fad95c466"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.871019,
+          "best_chunk_id": "openwcs-wiki/Services.md::0017::1c9b3e84f12a"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Transport-Overview.md",
+          "score": 0.870386,
+          "best_chunk_id": "openwcs-wiki/Transport-Overview.md::0008::ba79ad0d72a1"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.866791,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0104::eeccabc13eb2"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Hardware-Visualisation.md",
+          "score": 0.865843,
+          "best_chunk_id": "openwcs-wiki/Hardware-Visualisation.md::0007::8f0ee5b5838f"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.864828,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0013::ca75901641b3"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.859753,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0032::907dfaae0f16"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/process-designer-spec.md",
+          "score": 0.858338,
+          "best_chunk_id": "openwcs-repo/docs/process-designer-spec.md::0024::020046746ddb"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md",
+          "score": 0.85799,
+          "best_chunk_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md::0006::7575dd67e4df"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 0.5,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.613147,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.850345,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.850345,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.877215,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.877215,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": -0.02687,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.02687,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-011",
+      "question": "How can current stock be rebuilt from the transaction history in openWCS?",
+      "split": "dev",
+      "language": "en",
+      "category": "inventory",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/AS-BUILT.md",
+        "openwcs-repo/services/txlog/README.md",
+        "openwcs-repo/services/inventory/README.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.881475,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0080::1d9c7ef0f590"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.881418,
+          "best_chunk_id": "openwcs-repo/README.md::0028::92ddea2ff76d"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/contracts/openapi/inventory.yaml",
+          "score": 0.877706,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/inventory.yaml::0000::544b062fe272"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/contracts/openapi/txlog.yaml",
+          "score": 0.875425,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/txlog.yaml::0000::8a058e940483"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.874457,
+          "best_chunk_id": "openwcs-repo/build.md::0010::ce2354c4bdf1"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/contracts/openapi/counting.yaml",
+          "score": 0.871145,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/counting.yaml::0000::84a188328f6c"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.868553,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0037::469d2d3f2490"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.864917,
+          "best_chunk_id": "openwcs-wiki/Home.md::0001::8bfde61b3f1d"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.863358,
+          "best_chunk_id": "openwcs-wiki/Inbound-and-Inventory.md::0006::08a3d83b929e"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/contracts/openapi/order-management.yaml",
+          "score": 0.863297,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/order-management.yaml::0000::e5005818c7e5"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.333333,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 0.333333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.469279,
+        "recall_at_5": 0.333333,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.469279,
+        "recall_at_10": 0.333333,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 0.469279,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.333333,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.16716,
+          "mrr_at_10": 0.166667
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.333333,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.469279,
+          "recall_at_5": 0.333333,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.469279,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.302119,
+          "mrr_at_10": 0.833333
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-012",
+      "question": "What prevents a newly published handheld process definition from changing work that is already in progress?",
+      "split": "dev",
+      "language": "en",
+      "category": "process",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/process-designer-spec.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-wiki/Process-Designer.md",
+          "score": 0.853064,
+          "best_chunk_id": "openwcs-wiki/Process-Designer.md::0000::fcbeb172f8ee"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.844498,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0036::700d794a13fe"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/process-designer-spec.md",
+          "score": 0.843789,
+          "best_chunk_id": "openwcs-repo/docs/process-designer-spec.md::0002::e31aecdca74a"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/contracts/openapi/process-designer.yaml",
+          "score": 0.842711,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/process-designer.yaml::0000::b29828a1f1d9"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Mobile-Process-Designer.md",
+          "score": 0.842411,
+          "best_chunk_id": "openwcs-wiki/Mobile-Process-Designer.md::0000::60612971be46"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.836659,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0008::bcd114c9afe6"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Roadmap-and-Status.md",
+          "score": 0.826616,
+          "best_chunk_id": "openwcs-wiki/Roadmap-and-Status.md::0002::851070d67456"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.820942,
+          "best_chunk_id": "openwcs-repo/README.md::0010::a680a3504759"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md",
+          "score": 0.819397,
+          "best_chunk_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md::0010::34bda6463214"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.818249,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0008::f629733e60db"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.5,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.5,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 0.5,
+        "mrr_at_10": 0.333333
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": -1.0,
+          "precision_at_1": -1.0,
+          "ndcg_at_1": -1.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": -0.5,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": -0.5,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.5,
+          "mrr_at_10": -0.666667
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-test-001",
+      "question": "How does the canonical Host API prevent retries from duplicating writes, and how are failed webhook deliveries resumed?",
+      "split": "test",
+      "language": "en",
+      "category": "integration",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/AS-BUILT.md",
+        "openwcs-repo/services/integration-host/README.md",
+        "openwcs-repo/contracts/openapi/host-api.yaml",
+        "openwcs-wiki/Host-Integration.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.884676,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0111::6eb2d7dd7995"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.879559,
+          "best_chunk_id": "openwcs-wiki/Services.md::0017::1c9b3e84f12a"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Dashboards.md",
+          "score": 0.879497,
+          "best_chunk_id": "openwcs-wiki/Dashboards.md::0006::3140e7ea2de8"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Areas.md",
+          "score": 0.877419,
+          "best_chunk_id": "openwcs-wiki/Areas.md::0006::67525e842968"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/services/integration-host/README.md",
+          "score": 0.875442,
+          "best_chunk_id": "openwcs-repo/services/integration-host/README.md::0000::12dfb4458ee8"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Host-Integration.md",
+          "score": 0.875091,
+          "best_chunk_id": "openwcs-wiki/Host-Integration.md::0003::03a354404ce1"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.874583,
+          "best_chunk_id": "openwcs-wiki/Slotting-and-Replenishment.md::0010::1af43b23e678"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/services/notification/README.md",
+          "score": 0.874028,
+          "best_chunk_id": "openwcs-repo/services/notification/README.md::0003::3bd80b585d38"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Horizontal-Scaling.md",
+          "score": 0.872947,
+          "best_chunk_id": "openwcs-wiki/Horizontal-Scaling.md::0006::e2ab200985e8"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.872153,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0006::8c0c28c7cb1f"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.25,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 0.25,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.469279,
+        "recall_at_5": 0.5,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.5414,
+        "recall_at_10": 0.75,
+        "precision_at_10": 0.3,
+        "ndcg_at_10": 0.680456,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.25,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 0.765361,
+          "recall_at_5": 0.75,
+          "precision_at_5": 0.6,
+          "ndcg_at_5": 0.787702,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.4,
+          "ndcg_at_10": 0.926758,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": -0.25,
+          "precision_at_3": -0.333334,
+          "ndcg_at_3": -0.296082,
+          "recall_at_5": -0.25,
+          "precision_at_5": -0.2,
+          "ndcg_at_5": -0.246302,
+          "recall_at_10": -0.25,
+          "precision_at_10": -0.1,
+          "ndcg_at_10": -0.246302,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-test-002",
+      "question": "Is the default local stack safe to expose publicly, and what must change at the trust boundary?",
+      "split": "test",
+      "language": "en",
+      "category": "security",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/SECURITY.md",
+        "openwcs-wiki/Security.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-wiki/Security.md",
+          "score": 0.866295,
+          "best_chunk_id": "openwcs-wiki/Security.md::0000::7d73724365f5"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/SECURITY.md",
+          "score": 0.856252,
+          "best_chunk_id": "openwcs-repo/SECURITY.md::0005::831e73172f44"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.848144,
+          "best_chunk_id": "openwcs-repo/README.md::0044::867fe21d75f2"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.846403,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0145::be16fd95a312"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.841026,
+          "best_chunk_id": "openwcs-repo/build.md::0055::231bf7a8409c"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.840105,
+          "best_chunk_id": "openwcs-wiki/Outbound-Flow.md::0010::822bd87194f9"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Dashboards.md",
+          "score": 0.840054,
+          "best_chunk_id": "openwcs-wiki/Dashboards.md::0000::377aab371ab0"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.837327,
+          "best_chunk_id": "openwcs-wiki/Goods-to-Person-Stations.md::0014::1524ed79daf6"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.836663,
+          "best_chunk_id": "openwcs-wiki/Inbound-and-Inventory.md::0005::ecd456f58e46"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Transport-Overview.md",
+          "score": 0.833752,
+          "best_chunk_id": "openwcs-wiki/Transport-Overview.md::0010::00206d1a0328"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-test-003",
+      "question": "Can a Proposed ADR by itself prove that a warehouse capability is implemented?",
+      "split": "test",
+      "language": "en",
+      "category": "architecture",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/AS-BUILT.md",
+        "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+        "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md",
+          "score": 0.865672,
+          "best_chunk_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md::0001::5d47f836a1bf"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md",
+          "score": 0.852215,
+          "best_chunk_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md::0008::6b7d56d56350"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md",
+          "score": 0.851837,
+          "best_chunk_id": "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md::0001::c7168578da5b"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+          "score": 0.847797,
+          "best_chunk_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md::0001::7aa5c49a8e2f"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.847528,
+          "best_chunk_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md::0001::0545527faaed"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/adr/0007-impl-contract.md",
+          "score": 0.846778,
+          "best_chunk_id": "openwcs-repo/docs/adr/0007-impl-contract.md::0000::89e1a36738e1"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+          "score": 0.846031,
+          "best_chunk_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md::0002::129294715b35"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+          "score": 0.845871,
+          "best_chunk_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md::0001::f6ae3560fad7"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.843864,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0031::f1d82768c862"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.842014,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0151::2330624f290e"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.333333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.234639,
+        "recall_at_5": 0.333333,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.234639,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.3,
+        "ndcg_at_10": 0.511558,
+        "mrr_at_10": 0.333333
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.234639,
+          "recall_at_5": 0.333333,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.234639,
+          "recall_at_10": 0.666667,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.38268,
+          "mrr_at_10": 0.333333
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.333333,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.128878,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-test-005",
+      "question": "How does openWCS preserve bounded contexts when inventory references SKU and location data owned elsewhere?",
+      "split": "test",
+      "language": "en",
+      "category": "architecture",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+        "openwcs-repo/build.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+          "score": 0.899862,
+          "best_chunk_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md::0002::6a3561a668b6"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.899419,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0075::bd90b39b9695"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.893077,
+          "best_chunk_id": "openwcs-wiki/Inbound-and-Inventory.md::0007::0fd39a94c415"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.890672,
+          "best_chunk_id": "openwcs-repo/build.md::0010::ce2354c4bdf1"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.884647,
+          "best_chunk_id": "openwcs-repo/README.md::0027::844febef37c5"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.882836,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0025::13ee4cecbacb"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.882769,
+          "best_chunk_id": "openwcs-wiki/Services.md::0008::ea28e72692db"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.88002,
+          "best_chunk_id": "openwcs-wiki/Slotting-and-Replenishment.md::0000::9bc01a98173b"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.879621,
+          "best_chunk_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md::0001::0545527faaed"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+          "score": 0.876253,
+          "best_chunk_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md::0002::a4e3b9552bd7"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 0.5,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.613147,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.877215,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.877215,
+        "mrr_at_10": 1.0
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": -0.5,
+          "precision_at_3": -0.333334,
+          "ndcg_at_3": -0.386853,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": -0.122785,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.122785,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-test-006",
+      "question": "Qual é a fronteira de responsabilidade entre o ERP ou WMS, o openWCS e os adaptadores dos equipamentos?",
+      "split": "test",
+      "language": "pt-BR",
+      "category": "architecture",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/README.md",
+        "openwcs-wiki/Architecture.md",
+        "openwcs-wiki/Equipment-Integration.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.853988,
+          "best_chunk_id": "openwcs-repo/build.md::0001::cdf6bbd51d53"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.852876,
+          "best_chunk_id": "openwcs-wiki/Home.md::0000::4a899ce1ddec"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.850657,
+          "best_chunk_id": "openwcs-repo/README.md::0000::87585a71d728"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.845918,
+          "best_chunk_id": "openwcs-wiki/Architecture.md::0000::4da4dd655885"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.845291,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0060::330bd8335014"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.843308,
+          "best_chunk_id": "openwcs-wiki/Equipment-Integration.md::0000::dbb3f946f001"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.843004,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0070::ca5e7308bd6b"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/SECURITY.md",
+          "score": 0.841132,
+          "best_chunk_id": "openwcs-repo/SECURITY.md::0000::03928acd2a43"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Host-Integration.md",
+          "score": 0.838238,
+          "best_chunk_id": "openwcs-wiki/Host-Integration.md::0000::c44f5aab2d50"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/contracts/openapi/host-api.yaml",
+          "score": 0.838,
+          "best_chunk_id": "openwcs-repo/contracts/openapi/host-api.yaml::0000::9c55b92883e1"
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.333333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.234639,
+        "recall_at_5": 0.666667,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.436747,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.3,
+        "ndcg_at_10": 0.603907,
+        "mrr_at_10": 0.333333
+      },
+      "comparison": {
+        "bm25_metrics": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.234639,
+          "recall_at_5": 0.333333,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.234639,
+          "recall_at_10": 0.666667,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.4018,
+          "mrr_at_10": 0.333333
+        },
+        "metric_deltas": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.333334,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.202108,
+          "recall_at_10": 0.333333,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.202107,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-test-004",
+      "question": "What is the production password for the proprietary PLC controlling customer warehouse line 7?",
+      "split": "test",
+      "language": "en",
+      "category": "unanswerable",
+      "answerable": false,
+      "relevant_documents": [],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.816026,
+          "best_chunk_id": "openwcs-repo/docs/AS-BUILT.md::0092::41d3ea46127e"
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.813821,
+          "best_chunk_id": "openwcs-repo/build.md::0004::e82e07aedf7f"
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.810726,
+          "best_chunk_id": "openwcs-wiki/Services.md::0001::a4ee20e76412"
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.806842,
+          "best_chunk_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md::0006::7f4e5410ddfd"
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.805283,
+          "best_chunk_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md::0052::14a49eb69bd4"
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.805198,
+          "best_chunk_id": "openwcs-repo/README.md::0025::d161313ce85f"
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Deployment-Guide.md",
+          "score": 0.804137,
+          "best_chunk_id": "openwcs-wiki/Deployment-Guide.md::0028::aec5dfdbea65"
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.804126,
+          "best_chunk_id": "openwcs-wiki/Goods-to-Person-Stations.md::0032::82a2c95ec149"
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/process-designer-spec.md",
+          "score": 0.803232,
+          "best_chunk_id": "openwcs-repo/docs/process-designer-spec.md::0018::711aace01e18"
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Process-Designer.md",
+          "score": 0.802765,
+          "best_chunk_id": "openwcs-wiki/Process-Designer.md::0019::c56369b27fe9"
+        }
+      ],
+      "evaluation": "excluded_from_retrieval_metrics"
+    }
+  ]
+}

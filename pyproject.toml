@@ -20,12 +20,20 @@ dev = [
   "pytest>=8.3,<9",
   "ruff>=0.12,<1",
 ]
+vector = [
+  "psycopg[binary]==3.3.4",
+  "sentence-transformers==5.7.0",
+  "torch==2.13.0",
+  "transformers==5.15.1",
+]
 
 [project.scripts]
 wcs-fetch-corpus = "wcs_rag_evals.fetch_corpus:main"
 wcs-validate-evals = "wcs_rag_evals.validate_dataset:main"
 wcs-build-index = "wcs_rag_evals.build_index:main"
 wcs-eval-bm25 = "wcs_rag_evals.evaluate_bm25:main"
+wcs-build-vector-index = "wcs_rag_evals.build_vector_index:main"
+wcs-eval-vector = "wcs_rag_evals.evaluate_vector:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wcs_rag_evals"]

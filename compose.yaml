@@ -1,0 +1,23 @@
+name: wcs-rag-evals
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.6-pg17-bookworm
+    environment:
+      POSTGRES_DB: wcs_rag
+      POSTGRES_USER: wcs
+      POSTGRES_PASSWORD: wcs_local_only
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - pgvector-data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wcs -d wcs_rag"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+volumes:
+  pgvector-data:
