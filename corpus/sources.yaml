@@ -1,0 +1,45 @@
+schema_version: "1.0"
+output_directory: .data/corpus
+manifest_path: .data/corpus-manifest.json
+max_file_bytes: 2097152
+allowed_extensions: [.md, .yaml, .yml]
+
+sources:
+  - id: openwcs-repo
+    repository: https://github.com/brettljausn-ai/openwcs.git
+    revision: 0aca8e6719f03b76044d84bfd3603e5a6689b762
+    license: AGPL-3.0-only
+    license_url: https://github.com/brettljausn-ai/openwcs/blob/0aca8e6719f03b76044d84bfd3603e5a6689b762/LICENSE
+    authority: source_of_truth
+    include:
+      - README.md
+      - build.md
+      - SECURITY.md
+      - contracts/README.md
+      - contracts/openapi/*.yaml
+      - docs/AS-BUILT.md
+      - docs/DEVELOPMENT-STATUS.md
+      - docs/SCALING.md
+      - docs/process-designer-spec.md
+      - docs/adr/*.md
+      - services/*/README.md
+      - services/adapters/*/README.md
+    exclude:
+      - services/integration-sap/README.md
+      - services/integration-manhattan/README.md
+
+  - id: openwcs-wiki
+    repository: https://github.com/brettljausn-ai/openwcs.wiki.git
+    revision: 47ebafd3fa2966926bcc3b7589807ecc9d4171a8
+    license: AGPL-3.0-only
+    license_url: https://github.com/brettljausn-ai/openwcs/wiki/License
+    authority: explanatory
+    include:
+      - "*.md"
+    exclude:
+      - _Footer.md
+      - _Sidebar.md
+      - Contributing.md
+      - License.md
+      - Live-Demo.md
+
