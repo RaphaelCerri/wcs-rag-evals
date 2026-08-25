@@ -2,7 +2,8 @@
 
 | Data | Tipo | Escopo | Título | Arquivo |
 |------|------|--------|--------|---------|
-| 2026-08-25 | feature | evals, judge, observabilidade | Infraestrutura de calibração humana do LLM-as-judge | [.](2026-08-25-calibracao-llm-judge.md) |
+| 2026-08-25 | correcao | evals, judge, governança | Protocolo selado de calibration e validation do judge | [.](2026-08-25-protocolo-judge-selado.md) |
+| 2026-08-25 | feature | evals, judge, observabilidade | Infraestrutura de calibração do LLM-as-judge | [.](2026-08-25-calibracao-llm-judge.md) |
 | 2026-08-25 | feature | generation, evals, safety | Baseline extrativo com citações e recusa | [.](2026-08-25-geracao-extrativa-citada.md) |
 | 2026-08-25 | feature | retrieval, evals, benchmark | Reranker multilíngue com gates predefinidos | [.](2026-08-25-reranker-multilingue.md) |
 | 2026-08-25 | feature | retrieval, evals | Retrieval híbrido com Reciprocal Rank Fusion | [.](2026-08-25-retrieval-hibrido-rrf.md) |

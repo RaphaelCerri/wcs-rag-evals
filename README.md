@@ -160,7 +160,7 @@ pytest
 | 3 | Retrieval híbrido e rank fusion | concluída: ganho de Recall@5 e nDCG em dev e test |
 | 4 | Reranker | concluída: latência aprovada, qualidade reprovada; Hybrid RRF mantido |
 | 5 | Geração com citações | concluída: baseline extrativo aceito; Qwen local rejeitado em dev |
-| 6 | LLM-as-judge calibrado | em andamento: infraestrutura pronta, rótulos humanos pendentes |
+| 6 | LLM-as-judge calibrado | revisão por agentes concluída; protocolo selado, API pendente |
 | 7 | Regression gate e observabilidade | CI falha em regressão deliberada |
 
 ## Documentação

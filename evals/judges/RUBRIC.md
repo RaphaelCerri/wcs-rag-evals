@@ -17,7 +17,7 @@ Uma resposta só recebe `pass` quando as quatro dimensões abaixo atingem 2 e n�
 |---|---|---|---|
 | Groundedness | Todas as afirmações materiais têm apoio | Há apoio parcial ou ambiguidade | Há contradição ou afirmação material sem apoio |
 | Relevância | Responde diretamente, sem ruído prejudicial | Resposta parcialmente útil ou com ruído | Não responde ao pedido |
-| Suporte das citações | Citações sustentam todas as afirmações centrais | Sustentam apenas parte | Ausentes, inválidas ou incompatíveis |
+| Suporte documental das citações | O conjunto de documentos citados sustenta as afirmações centrais | Sustenta apenas parte | Ausente, inválido ou incompatível |
 | Completude | Cobre todos os fatos necessários | Omite um detalhe secundário | Omite um requisito material |
 
 ## Marcadores de erro
@@ -36,6 +36,10 @@ Uma resposta só recebe `pass` quando as quatro dimensões abaixo atingem 2 e n�
 3. Use a referência e os fatos obrigatórios para verificar completude, não para exigir redação igual.
 4. Registre primeiro a decisão, depois os marcadores e uma nota curta quando necessário.
 5. Não altere rótulos após ver a saída do judge. Divergências são analisadas separadamente.
+
+Em casos corretamente classificados como não respondíveis, uma recusa sem citações pode receber
+suporte documental 2. A ausência de segredo ou autorização é parte do contrato do caso. Esta versão
+não mede associação claim-passagem; mede suporte pelo conjunto documental citado.
 
 Oito casos `calibration` servem para diagnosticar e ajustar a rubrica. Cinco casos `validation`
 ficam intocados até a medição final. A amostra é um piloto de engenharia, não evidência estatística

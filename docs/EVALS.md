@@ -60,12 +60,17 @@ Faithfulness semântica, answer relevance semântica e entailment entre claim e 
 
 ### Judge semântico
 
-A Fase 6 usa um protocolo humano independente antes de aceitar qualquer métrica produzida por
-LLM. O piloto separa oito casos de calibração e cinco de validação, executa o judge três vezes por
-caso e mede concordância exata, Cohen's kappa, matriz de confusão e estabilidade. O prompt não
-recebe rótulos humanos nem a partição de calibração.
+A Fase 6 ainda não possui ground truth humano especializado. Três revisores por agentes produziram
+uma adjudicação independente e unânime, explicitamente marcada como proxy model-assisted: 2 casos
+`pass` e 11 `fail`. Isso não é apresentado como evidência humana.
 
-A rubrica e os rótulos ficam em `evals/judges/`. O pacote com evidências é gerado em `reports/`,
+O piloto separa oito casos de calibração e cinco de validação. Calibration fixa por hash modelo,
+prompt, schema, configuração e rótulos antes de validation ser liberada. Três ordens de evidência
+medem sensibilidade posicional. Concordância exata, Cohen's kappa, matriz de confusão e estabilidade
+são estatísticas descritivas deste corpus pequeno e desbalanceado.
+
+A rubrica, a proveniência dos rótulos por proxy e um template humano vazio ficam em
+`evals/judges/`. O pacote com evidências é gerado em `reports/`,
 fora do Git para não republicar o corpus AGPL. O procedimento completo está em
 [`docs/JUDGE_CALIBRATION.md`](JUDGE_CALIBRATION.md).
 

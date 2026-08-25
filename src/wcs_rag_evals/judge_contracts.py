@@ -51,7 +51,8 @@ class HumanAnnotation(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     case_id: str
-    reviewer: str = "Raphael Caveagna"
+    reviewer: str | None = None
+    qualification: str | None = None
     label: HumanLabel | None = None
     error_flags: list[ErrorFlag] = Field(default_factory=list)
     notes: str = ""
@@ -60,6 +61,43 @@ class HumanAnnotation(BaseModel):
     def flags_require_fail_label(self) -> HumanAnnotation:
         if self.error_flags and self.label not in ("fail", "unsure"):
             raise ValueError("error flags require a fail or unsure label")
+        if self.label is not None and (not self.reviewer or not self.qualification):
+            raise ValueError("completed human labels require reviewer and qualification")
+        if self.label == "unsure" and not self.notes.strip():
+            raise ValueError("unsure labels require a note")
+        return self
+
+
+class ReviewerVote(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    role: Literal["CEA", "CSA", "CFA-reviewer"]
+    reviewer_type: Literal["model_assisted"] = "model_assisted"
+    label: HumanLabel
+    blinded_to_persisted_labels: bool
+
+
+class ReferenceAnnotation(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    schema_version: Literal["1.0"] = "1.0"
+    case_id: str
+    reference_type: Literal["model_assisted_adjudication"]
+    label: HumanLabel
+    error_flags: list[ErrorFlag] = Field(default_factory=list)
+    rationale: str = Field(min_length=1)
+    votes: list[ReviewerVote] = Field(min_length=2)
+
+    @model_validator(mode="after")
+    def consensus_must_be_unanimous_and_reviewed_blind(self) -> ReferenceAnnotation:
+        if any(vote.label != self.label for vote in self.votes):
+            raise ValueError("adjudicated reference requires unanimous votes")
+        if sum(vote.blinded_to_persisted_labels for vote in self.votes) < 2:
+            raise ValueError("at least two votes must be blind to persisted labels")
+        if self.error_flags and self.label not in ("fail", "unsure"):
+            raise ValueError("error flags require a fail or unsure label")
+        if self.label == "unsure" and not self.rationale.strip():
+            raise ValueError("unsure labels require a rationale")
         return self
 
 
