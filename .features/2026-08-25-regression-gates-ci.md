@@ -32,4 +32,5 @@ comando roda automaticamente no GitHub Actions.
 
 O teste de controle reduz Recall@5 de test para zero e confirma a falha. O CI valida artifacts
 versionados e proveniência, mas não regenera modelos ou pgvector. O gap pt-BR e o judge pendente
-continuam declarados em vez de receber thresholds sem evidência.
+continuam declarados em vez de receber thresholds sem evidência. Hashes textuais tratam LF e CRLF
+como representações portáveis do mesmo artifact e ainda reportam os bytes observados.

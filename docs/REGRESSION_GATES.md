@@ -11,6 +11,9 @@ quando um artifact publicado cruza um limite predefinido. O gate cobre:
 - ausência de claims proibidos detectados lexicalmente;
 - hashes de proveniência entre golden set, BM25, dense, hybrid e geração.
 
+Hashes de arquivos textuais aceitam representações LF e CRLF semanticamente equivalentes. O
+relatório preserva o hash bruto observado e informa qual normalização correspondeu ao esperado.
+
 O teste automatizado injeta uma regressão deliberada em Recall@5 de test e confirma que somente o
 gate correspondente falha. Isso testa o mecanismo, não apenas o caminho feliz.
 

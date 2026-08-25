@@ -4,12 +4,22 @@ from __future__ import annotations
 
 import argparse
 import json
+from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
 import yaml
 
-from wcs_rag_evals.evaluate_bm25 import sha256_file
+
+def _text_sha256_candidates(path: Path) -> dict[str, str]:
+    raw = path.read_bytes()
+    normalized = raw.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    variants = {
+        "raw": raw,
+        "lf": normalized.encode("utf-8"),
+        "crlf": normalized.replace("\n", "\r\n").encode("utf-8"),
+    }
+    return {name: sha256(value).hexdigest() for name, value in variants.items()}
 
 
 def _value_at(document: dict[str, Any], dotted_path: str) -> Any:
@@ -63,15 +73,17 @@ def _validate_provenance(root: Path, artifacts: dict[str, dict[str, Any]]) -> li
     results = []
     for name, artifact in tracked:
         path = root / artifact["path"]
-        observed = sha256_file(path)
+        candidates = _text_sha256_candidates(path)
         expected = artifact["sha256"]
+        matched_as = next((name for name, value in candidates.items() if value == expected), None)
         results.append(
             {
                 "id": name,
                 "path": artifact["path"],
                 "expected_sha256": expected,
-                "observed_sha256": observed,
-                "passed": observed == expected,
+                "observed_sha256": candidates["raw"],
+                "matched_as": matched_as,
+                "passed": matched_as is not None,
             }
         )
     return results
