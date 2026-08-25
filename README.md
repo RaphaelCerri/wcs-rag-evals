@@ -6,7 +6,7 @@ O domínio escolhido é logística e automação de armazéns. O corpus inicial 
 
 ## Estado atual
 
-**Fase 2, retrieval vetorial comparado.** O projeto já contém:
+**Fase 3, retrieval híbrido medido.** O projeto já contém:
 
 - manifesto reproduzível de fontes e revisões;
 - ingestão allowlist, sem republicar o corpus de terceiro;
@@ -17,10 +17,11 @@ O domínio escolhido é logística e automação de armazéns. O corpus inicial 
 - implementação própria de BM25 com ranking por documento;
 - embeddings multilíngues persistidos em PostgreSQL com pgvector;
 - índice HNSW disponível para escala e busca exata usada no corpus atual;
+- Reciprocal Rank Fusion com parâmetros selecionados exclusivamente em `dev`;
 - Recall@k, Precision@k, MRR@10 e nDCG@k calculados por caso e por split;
-- comparação reproduzível entre retrieval lexical e vetorial.
+- comparação reproduzível entre retrieval lexical, vetorial e híbrido.
 
-Ainda não há retrieval híbrido, reranker, geração por LLM ou API. Esses componentes entram nas próximas fases e precisarão justificar sua complexidade sob os mesmos casos.
+Ainda não há reranker, geração por LLM ou API. Esses componentes entram nas próximas fases e precisarão justificar sua complexidade sob os mesmos casos.
 
 ## Resultado do baseline
 
@@ -50,6 +51,23 @@ O baseline denso usa [`intfloat/multilingual-e5-small`](https://huggingface.co/i
 O vetorial não substitui o BM25: perde precisão no topo agregado, mas aumenta cobertura no top 10, melhora o split de teste e duplica o Recall@5 do caso pt-BR. Essa complementaridade é a hipótese mensurável da próxima fase, que combinará os dois rankings em vez de escolher um vencedor artificial.
 
 Veja a [comparação vetorial](evals/results/dense-v0.1.md) ou o [resultado completo em JSON](evals/results/dense-v0.1.json).
+
+## Resultado do retrieval híbrido
+
+O RRF combina posições, não scores incompatíveis. Uma grade pequena de 20 configurações foi avaliada somente nos 12 casos respondíveis de `dev`, usando nDCG@10 como objetivo primário. A configuração selecionada foi a forma simétrica padrão: constante 60 e pesos 1:1.
+
+| Grupo | Retriever | Recall@5 | Recall@10 | MRR@10 | nDCG@10 |
+|---|---|---:|---:|---:|---:|
+| Todos | BM25 | 0,819 | 0,892 | 0,696 | 0,718 |
+| Todos | Vetorial | 0,784 | 0,946 | 0,688 | 0,710 |
+| Todos | **Hybrid RRF** | **0,873** | 0,941 | **0,794** | **0,809** |
+| Test | BM25 | 0,683 | 0,867 | 0,733 | 0,742 |
+| Test | Vetorial | 0,700 | **0,950** | 0,733 | 0,735 |
+| Test | **Hybrid RRF** | **0,800** | 0,933 | 0,733 | **0,775** |
+
+O híbrido aumentou Recall@5 de teste em 0,117 contra BM25 e em 0,100 contra dense retrieval. Ele também obteve o melhor nDCG@10 e MRR@10 agregado. Dense retrieval isolado ainda preserva o maior Recall@10, portanto os três resultados permanecem publicados em vez de esconder o trade-off.
+
+Veja o [relatório híbrido](evals/results/hybrid-v0.1.md) ou o [artefato auditável em JSON](evals/results/hybrid-v0.1.json).
 
 ## Por que avaliação primeiro
 
@@ -87,6 +105,7 @@ docker compose up -d --wait
 $env:WCS_DATABASE_URL = "postgresql://wcs:wcs_local_only@localhost:55432/wcs_rag"
 wcs-build-vector-index
 wcs-eval-vector
+wcs-eval-hybrid
 pytest
 ```
 
@@ -97,7 +116,7 @@ pytest
 | 0 | Corpus fixo, golden set e contratos | dataset íntegro e reproduzível |
 | 1 | Baseline lexical BM25 | concluída: métricas de retrieval publicadas |
 | 2 | Embeddings e pgvector | concluída: ganhos de cobertura e gap pt-BR medidos |
-| 3 | Retrieval híbrido e rank fusion | ganho consistente em dev e test |
+| 3 | Retrieval híbrido e rank fusion | concluída: ganho de Recall@5 e nDCG em dev e test |
 | 4 | Reranker | melhoria maior que custo e latência adicionais |
 | 5 | Geração com citações | faithfulness e citation correctness medidas |
 | 6 | LLM-as-judge calibrado | concordância comparada com rótulo humano |

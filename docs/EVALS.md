@@ -37,6 +37,10 @@ O baseline vetorial publica as mesmas métricas e inclui deltas agregados e por 
 
 Comparação publicada: [`evals/results/dense-v0.1.md`](../evals/results/dense-v0.1.md).
 
+O retrieval híbrido seleciona parâmetros apenas em `dev` e registra todos os trials avaliados. O resultado de `test` não participa da escolha. A configuração RRF fixada elevou Recall@5 e nDCG@10 nos dois splits, enquanto o dense isolado manteve o maior Recall@10 de teste.
+
+Comparação dos três retrievers: [`evals/results/hybrid-v0.1.md`](../evals/results/hybrid-v0.1.md).
+
 ### Geração
 
 - cobertura de fatos obrigatórios;

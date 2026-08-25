@@ -41,7 +41,7 @@ Compara resultados contra o golden set. Métricas determinísticas de retrieval 
 - YAML para manifesto humano de fontes.
 - Conteúdo bruto e índices reconstruíveis fora do Git; métricas agregadas e rankings publicados em `evals/results/`.
 - Revisões de corpus sempre fixadas por SHA completo.
-- Nenhuma chave de API é necessária nas Fases 0, 1 e 2.
+- Nenhuma chave de API é necessária nas Fases 0, 1, 2 e 3.
 
 ## Decisões da Fase 1
 
@@ -65,9 +65,19 @@ Compara resultados contra o golden set. Métricas determinísticas de retrieval 
 - Cache local retomável por lote, evitando recalcular embeddings depois de interrupções.
 - Mesmo chunking, golden set, top-k e agregação do BM25 para manter a comparação controlada.
 
+## Decisões da Fase 3
+
+- Weighted Reciprocal Rank Fusion para combinar posições sem normalizar scores de naturezas diferentes.
+- Top 10 de BM25 e dense retrieval como entradas versionadas e rastreáveis.
+- Grade predefinida de 20 configurações, com quatro constantes e cinco pesos para dense retrieval.
+- Seleção exclusivamente nos 12 casos respondíveis de `dev`.
+- Objetivo lexicográfico: nDCG@10, Recall@5 e MRR@10.
+- Split `test` avaliado somente depois de a configuração ser fixada.
+- Ranks e contribuição de cada retriever preservados por documento no relatório JSON.
+- Nenhum reranker incluído nesta fase, mantendo isolado o efeito da rank fusion.
+
 ## Próximas decisões
 
-- método de rank fusion;
 - reranker;
 - provedor e protocolo de geração.
 

@@ -1,0 +1,4590 @@
+{
+  "schema_version": "1.0",
+  "baseline": "hybrid-rrf-v0.1",
+  "configuration": {
+    "method": "weighted_reciprocal_rank_fusion",
+    "selection_split": "dev",
+    "selection_objective": [
+      "ndcg_at_10",
+      "recall_at_5",
+      "mrr_at_10"
+    ],
+    "selected": {
+      "rank_constant": 60,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.0
+      }
+    },
+    "candidate_grid": {
+      "rank_constants": [
+        10,
+        20,
+        40,
+        60
+      ],
+      "dense_weights": [
+        0.5,
+        0.75,
+        1.0,
+        1.25,
+        1.5
+      ],
+      "bm25_weight": 1.0
+    },
+    "ranking_level": "document",
+    "source_depth": 10,
+    "k_values": [
+      1,
+      3,
+      5,
+      10
+    ]
+  },
+  "corpus": {
+    "manifest_sha256": "3b8ad0a04a9b7279d90df6b8f6c43ea5db49b6be2697d9c3efc1f497c0a108fd",
+    "document_count": 75,
+    "sources": [
+      {
+        "id": "openwcs-repo",
+        "repository": "https://github.com/brettljausn-ai/openwcs.git",
+        "revision": "0aca8e6719f03b76044d84bfd3603e5a6689b762",
+        "license": "AGPL-3.0-only",
+        "authority": "source_of_truth"
+      },
+      {
+        "id": "openwcs-wiki",
+        "repository": "https://github.com/brettljausn-ai/openwcs.wiki.git",
+        "revision": "47ebafd3fa2966926bcc3b7589807ecc9d4171a8",
+        "license": "AGPL-3.0-only",
+        "authority": "explanatory"
+      }
+    ],
+    "chunk_count": 1458
+  },
+  "dataset": {
+    "path": "evals/datasets/golden-v0.1.jsonl",
+    "sha256": "15ee90921cdcb87cc8a0e10434e8633a176971c734e6b5936d8cc524858ae77a",
+    "case_count": 18,
+    "answerable_case_count": 17,
+    "unanswerable_case_count": 1
+  },
+  "source_reports": {
+    "bm25": {
+      "path": "evals/results/bm25-v0.1.json",
+      "sha256": "182dcd7214fec57458b762e43d202e67e322355942f99ec1e318ade25736e2c4"
+    },
+    "dense": {
+      "path": "evals/results/dense-v0.1.json",
+      "sha256": "5c51d5649e3797012251d240b82a1c1032e54111781b95c7345f0c9c45045c1a"
+    }
+  },
+  "tuning_trials": [
+    {
+      "rank_constant": 10,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 0.5
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.861111,
+        "precision_at_3": 0.444444,
+        "ndcg_at_3": 0.769823,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.791829,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.791829,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 10,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 0.75
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.802061,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.802061,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.802061,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 10,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.0
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.807181,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.807181,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.822562,
+        "mrr_at_10": 0.819444
+      }
+    },
+    {
+      "rank_constant": 10,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.25
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.458333,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.861111,
+        "precision_at_3": 0.444444,
+        "ndcg_at_3": 0.765515,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.78752,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.803639,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 10,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.5
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.416667,
+        "precision_at_1": 0.583333,
+        "ndcg_at_1": 0.583333,
+        "recall_at_3": 0.861111,
+        "precision_at_3": 0.444444,
+        "ndcg_at_3": 0.746657,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.768662,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.784781,
+        "mrr_at_10": 0.763889
+      }
+    },
+    {
+      "rank_constant": 20,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 0.5
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.861111,
+        "precision_at_3": 0.444444,
+        "ndcg_at_3": 0.769823,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.791829,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.791829,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 20,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 0.75
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.795371,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.795371,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.795371,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 20,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.0
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.807181,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.807181,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.822562,
+        "mrr_at_10": 0.819444
+      }
+    },
+    {
+      "rank_constant": 20,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.25
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.458333,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.784373,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.784373,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.800491,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 20,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.5
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.416667,
+        "precision_at_1": 0.583333,
+        "ndcg_at_1": 0.583333,
+        "recall_at_3": 0.861111,
+        "precision_at_3": 0.444444,
+        "ndcg_at_3": 0.753347,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.775352,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.791471,
+        "mrr_at_10": 0.777778
+      }
+    },
+    {
+      "rank_constant": 40,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 0.5
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.795371,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.795371,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.795371,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 40,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 0.75
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.795371,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.795371,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.795371,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 40,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.0
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.807181,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.807181,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.822562,
+        "mrr_at_10": 0.819444
+      }
+    },
+    {
+      "rank_constant": 40,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.25
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.458333,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.791062,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.791062,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.807181,
+        "mrr_at_10": 0.819444
+      }
+    },
+    {
+      "rank_constant": 40,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.5
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.416667,
+        "precision_at_1": 0.583333,
+        "ndcg_at_1": 0.583333,
+        "recall_at_3": 0.861111,
+        "precision_at_3": 0.444444,
+        "ndcg_at_3": 0.753347,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.775352,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.791471,
+        "mrr_at_10": 0.777778
+      }
+    },
+    {
+      "rank_constant": 60,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 0.5
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.795371,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.795371,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.795371,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 60,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 0.75
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.795371,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.795371,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.795371,
+        "mrr_at_10": 0.805555
+      }
+    },
+    {
+      "rank_constant": 60,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.0
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.5,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.807181,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.807181,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.822562,
+        "mrr_at_10": 0.819444
+      }
+    },
+    {
+      "rank_constant": 60,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.25
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.458333,
+        "precision_at_1": 0.666667,
+        "ndcg_at_1": 0.666667,
+        "recall_at_3": 0.902778,
+        "precision_at_3": 0.472222,
+        "ndcg_at_3": 0.791062,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.791062,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.807181,
+        "mrr_at_10": 0.819444
+      }
+    },
+    {
+      "rank_constant": 60,
+      "weights": {
+        "bm25": 1.0,
+        "dense": 1.5
+      },
+      "dev_metrics": {
+        "case_count": 12,
+        "recall_at_1": 0.416667,
+        "precision_at_1": 0.583333,
+        "ndcg_at_1": 0.583333,
+        "recall_at_3": 0.861111,
+        "precision_at_3": 0.444444,
+        "ndcg_at_3": 0.753347,
+        "recall_at_5": 0.902778,
+        "precision_at_5": 0.283333,
+        "ndcg_at_5": 0.775352,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.791471,
+        "mrr_at_10": 0.777778
+      }
+    }
+  ],
+  "summaries": {
+    "all": {
+      "case_count": 17,
+      "recall_at_1": 0.426471,
+      "precision_at_1": 0.647059,
+      "ndcg_at_1": 0.647059,
+      "recall_at_3": 0.823529,
+      "precision_at_3": 0.490196,
+      "ndcg_at_3": 0.756434,
+      "recall_at_5": 0.872549,
+      "precision_at_5": 0.329412,
+      "ndcg_at_5": 0.780134,
+      "recall_at_10": 0.941176,
+      "precision_at_10": 0.182353,
+      "ndcg_at_10": 0.808503,
+      "mrr_at_10": 0.794118
+    },
+    "dev": {
+      "case_count": 12,
+      "recall_at_1": 0.5,
+      "precision_at_1": 0.666667,
+      "ndcg_at_1": 0.666667,
+      "recall_at_3": 0.902778,
+      "precision_at_3": 0.472222,
+      "ndcg_at_3": 0.807181,
+      "recall_at_5": 0.902778,
+      "precision_at_5": 0.283333,
+      "ndcg_at_5": 0.807181,
+      "recall_at_10": 0.944444,
+      "precision_at_10": 0.15,
+      "ndcg_at_10": 0.822562,
+      "mrr_at_10": 0.819444
+    },
+    "language:en": {
+      "case_count": 16,
+      "recall_at_1": 0.453125,
+      "precision_at_1": 0.6875,
+      "ndcg_at_1": 0.6875,
+      "recall_at_3": 0.854167,
+      "precision_at_3": 0.5,
+      "ndcg_at_3": 0.789046,
+      "recall_at_5": 0.885417,
+      "precision_at_5": 0.325,
+      "ndcg_at_5": 0.801596,
+      "recall_at_10": 0.9375,
+      "precision_at_10": 0.175,
+      "ndcg_at_10": 0.822908,
+      "mrr_at_10": 0.822917
+    },
+    "language:pt-BR": {
+      "case_count": 1,
+      "recall_at_1": 0.0,
+      "precision_at_1": 0.0,
+      "ndcg_at_1": 0.0,
+      "recall_at_3": 0.333333,
+      "precision_at_3": 0.333333,
+      "ndcg_at_3": 0.234639,
+      "recall_at_5": 0.666667,
+      "precision_at_5": 0.4,
+      "ndcg_at_5": 0.436747,
+      "recall_at_10": 1.0,
+      "precision_at_10": 0.3,
+      "ndcg_at_10": 0.578014,
+      "mrr_at_10": 0.333333
+    },
+    "test": {
+      "case_count": 5,
+      "recall_at_1": 0.25,
+      "precision_at_1": 0.6,
+      "ndcg_at_1": 0.6,
+      "recall_at_3": 0.633333,
+      "precision_at_3": 0.533333,
+      "ndcg_at_3": 0.634639,
+      "recall_at_5": 0.8,
+      "precision_at_5": 0.44,
+      "ndcg_at_5": 0.715221,
+      "recall_at_10": 0.933333,
+      "precision_at_10": 0.26,
+      "ndcg_at_10": 0.774759,
+      "mrr_at_10": 0.733333
+    }
+  },
+  "source_summaries": {
+    "bm25": {
+      "all": {
+        "case_count": 17,
+        "recall_at_1": 0.338235,
+        "precision_at_1": 0.529412,
+        "ndcg_at_1": 0.529412,
+        "recall_at_3": 0.686274,
+        "precision_at_3": 0.392157,
+        "ndcg_at_3": 0.623051,
+        "recall_at_5": 0.818627,
+        "precision_at_5": 0.294118,
+        "ndcg_at_5": 0.681757,
+        "recall_at_10": 0.892157,
+        "precision_at_10": 0.170588,
+        "ndcg_at_10": 0.718311,
+        "mrr_at_10": 0.696078
+      },
+      "dev": {
+        "case_count": 12,
+        "recall_at_1": 0.375,
+        "precision_at_1": 0.5,
+        "ndcg_at_1": 0.5,
+        "recall_at_3": 0.708333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.613102,
+        "recall_at_5": 0.875,
+        "precision_at_5": 0.266667,
+        "ndcg_at_5": 0.694407,
+        "recall_at_10": 0.902778,
+        "precision_at_10": 0.141667,
+        "ndcg_at_10": 0.708337,
+        "mrr_at_10": 0.680555
+      },
+      "language:en": {
+        "case_count": 16,
+        "recall_at_1": 0.359375,
+        "precision_at_1": 0.5625,
+        "ndcg_at_1": 0.5625,
+        "recall_at_3": 0.708333,
+        "precision_at_3": 0.395833,
+        "ndcg_at_3": 0.647327,
+        "recall_at_5": 0.848958,
+        "precision_at_5": 0.3,
+        "ndcg_at_5": 0.709702,
+        "recall_at_10": 0.90625,
+        "precision_at_10": 0.16875,
+        "ndcg_at_10": 0.738093,
+        "mrr_at_10": 0.71875
+      },
+      "language:pt-BR": {
+        "case_count": 1,
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.333333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.234639,
+        "recall_at_5": 0.333333,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.234639,
+        "recall_at_10": 0.666667,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.4018,
+        "mrr_at_10": 0.333333
+      },
+      "test": {
+        "case_count": 5,
+        "recall_at_1": 0.25,
+        "precision_at_1": 0.6,
+        "ndcg_at_1": 0.6,
+        "recall_at_3": 0.633333,
+        "precision_at_3": 0.533333,
+        "ndcg_at_3": 0.646928,
+        "recall_at_5": 0.683333,
+        "precision_at_5": 0.36,
+        "ndcg_at_5": 0.651396,
+        "recall_at_10": 0.866667,
+        "precision_at_10": 0.24,
+        "ndcg_at_10": 0.742248,
+        "mrr_at_10": 0.733333
+      }
+    },
+    "dense": {
+      "all": {
+        "case_count": 17,
+        "recall_at_1": 0.29902,
+        "precision_at_1": 0.529412,
+        "ndcg_at_1": 0.529412,
+        "recall_at_3": 0.661765,
+        "precision_at_3": 0.372549,
+        "ndcg_at_3": 0.578092,
+        "recall_at_5": 0.784314,
+        "precision_at_5": 0.282353,
+        "ndcg_at_5": 0.637662,
+        "recall_at_10": 0.946078,
+        "precision_at_10": 0.182353,
+        "ndcg_at_10": 0.709681,
+        "mrr_at_10": 0.688235
+      },
+      "dev": {
+        "case_count": 12,
+        "recall_at_1": 0.319444,
+        "precision_at_1": 0.5,
+        "ndcg_at_1": 0.5,
+        "recall_at_3": 0.736111,
+        "precision_at_3": 0.361111,
+        "ndcg_at_3": 0.606321,
+        "recall_at_5": 0.819444,
+        "precision_at_5": 0.25,
+        "ndcg_at_5": 0.645854,
+        "recall_at_10": 0.944444,
+        "precision_at_10": 0.15,
+        "ndcg_at_10": 0.699287,
+        "mrr_at_10": 0.669444
+      },
+      "language:en": {
+        "case_count": 16,
+        "recall_at_1": 0.317708,
+        "precision_at_1": 0.5625,
+        "ndcg_at_1": 0.5625,
+        "recall_at_3": 0.682292,
+        "precision_at_3": 0.375,
+        "ndcg_at_3": 0.599557,
+        "recall_at_5": 0.791667,
+        "precision_at_5": 0.275,
+        "ndcg_at_5": 0.650219,
+        "recall_at_10": 0.942708,
+        "precision_at_10": 0.175,
+        "ndcg_at_10": 0.716292,
+        "mrr_at_10": 0.710417
+      },
+      "language:pt-BR": {
+        "case_count": 1,
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.333333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.234639,
+        "recall_at_5": 0.666667,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.436747,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.3,
+        "ndcg_at_10": 0.603907,
+        "mrr_at_10": 0.333333
+      },
+      "test": {
+        "case_count": 5,
+        "recall_at_1": 0.25,
+        "precision_at_1": 0.6,
+        "ndcg_at_1": 0.6,
+        "recall_at_3": 0.483333,
+        "precision_at_3": 0.4,
+        "ndcg_at_3": 0.510341,
+        "recall_at_5": 0.7,
+        "precision_at_5": 0.36,
+        "ndcg_at_5": 0.618,
+        "recall_at_10": 0.95,
+        "precision_at_10": 0.26,
+        "ndcg_at_10": 0.734627,
+        "mrr_at_10": 0.733333
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "wcs-dev-001",
+      "question": "Where does openWCS sit between enterprise systems and warehouse equipment, and what responsibility belongs on each side?",
+      "split": "dev",
+      "language": "en",
+      "category": "architecture",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/README.md",
+        "openwcs-wiki/Architecture.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.032522475,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.031280547,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.031257631,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.030776515,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.030365769,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Deployment-Guide.md",
+          "score": 0.029877369,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 9
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.014492754
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/SECURITY.md",
+          "score": 0.016393443,
+          "source_ranks": {
+            "dense": 1
+          },
+          "source_contributions": {
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "bm25": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015625
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "dense": 7
+          },
+          "source_contributions": {
+            "dense": 0.014925373
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Roadmap-and-Status.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "bm25": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.5,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.306574,
+        "recall_at_5": 0.5,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.306574,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.491149,
+        "mrr_at_10": 0.333333
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.306574,
+          "recall_at_10": 0.5,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.306574,
+          "mrr_at_10": 0.333333
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.237198,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.44158,
+          "mrr_at_10": 0.2
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.5,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.184575,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.069376,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.049569,
+          "mrr_at_10": 0.133333
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-dev-002",
+      "question": "Why are batch, lot and serial-unit records owned by inventory instead of master data in openWCS?",
+      "split": "dev",
+      "language": "en",
+      "category": "inventory",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0001-inventory-data-ownership.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+          "score": 0.032786885,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.031754032,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.031746032,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.031280547,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Areas.md",
+          "score": 0.029910714,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 10
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.014285714
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/services/inventory/README.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "bm25": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015384615
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "dense": 5
+          },
+          "source_contributions": {
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "dense": 6
+          },
+          "source_contributions": {
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "bm25": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014925373
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "dense": 7
+          },
+          "source_contributions": {
+            "dense": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 1.0,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-003",
+      "question": "What happens to reservations when one line prevents an outbound order from being fully allocated?",
+      "split": "dev",
+      "language": "en",
+      "category": "outbound",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.032786885,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md",
+          "score": 0.031746032,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.030776515,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/contracts/openapi/allocation.yaml",
+          "score": 0.030076888,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 7
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.014925373
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Mobile-Process-Designer.md",
+          "score": 0.029198636,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 8
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.014705882
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.016129032,
+          "source_ranks": {
+            "bm25": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016129032
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/services/allocation/README.md",
+          "score": 0.016129032,
+          "source_ranks": {
+            "dense": 2
+          },
+          "source_contributions": {
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Areas.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "dense": 4
+          },
+          "source_contributions": {
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/contracts/openapi/order-management.yaml",
+          "score": 0.015384615,
+          "source_ranks": {
+            "bm25": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015384615
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "dense": 5
+          },
+          "source_contributions": {
+            "dense": 0.015384615
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.63093,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.63093,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 0.63093,
+        "mrr_at_10": 0.5
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.5,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.5,
+          "mrr_at_10": 0.333333
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.5,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.5,
+          "mrr_at_10": 0.333333
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.13093,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.13093,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.13093,
+          "mrr_at_10": 0.166667
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.13093,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.13093,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.13093,
+          "mrr_at_10": 0.166667
+        }
+      },
+      "first_relevant_rank": 2
+    },
+    {
+      "id": "wcs-dev-004",
+      "question": "How do APP cubing and ONE_TO_ONE cubing differ, and what does APP cubing deliberately not solve?",
+      "split": "dev",
+      "language": "en",
+      "category": "outbound",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md",
+          "score": 0.032002048,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.030776515,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.030365769,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 9
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.014492754
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/contracts/openapi/allocation.yaml",
+          "score": 0.016393443,
+          "source_ranks": {
+            "bm25": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Hardware-Visualisation.md",
+          "score": 0.016393443,
+          "source_ranks": {
+            "dense": 1
+          },
+          "source_contributions": {
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.016129032,
+          "source_ranks": {
+            "dense": 2
+          },
+          "source_contributions": {
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "dense": 4
+          },
+          "source_contributions": {
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "dense": 5
+          },
+          "source_contributions": {
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "bm25": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015384615
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "bm25": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015151515
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 1.0,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.63093,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.63093,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.63093,
+          "mrr_at_10": 0.5
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.5,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.5,
+          "mrr_at_10": 0.333333
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.36907,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.36907,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.36907,
+          "mrr_at_10": 0.5
+        },
+        "dense": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.5,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.5,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.5,
+          "mrr_at_10": 0.666667
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-005",
+      "question": "How does the put-away scorer reconcile lane consolidation, aisle redundancy, velocity and balance?",
+      "split": "dev",
+      "language": "en",
+      "category": "slotting",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.032786885,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.032258065,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.031498016,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.031257631,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.030776515,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+          "score": 0.028991597,
+          "source_ranks": {
+            "bm25": 10,
+            "dense": 8
+          },
+          "source_contributions": {
+            "bm25": 0.014285714,
+            "dense": 0.014705882
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+          "score": 0.028985507,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 9
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.014492754
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Hardware-Visualisation.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "dense": 5
+          },
+          "source_contributions": {
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Roadmap-and-Status.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "bm25": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "bm25": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 1.0,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-006",
+      "question": "What priorities and triggers are used for manual pick-face replenishment?",
+      "split": "dev",
+      "language": "en",
+      "category": "slotting",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+        "openwcs-wiki/Slotting-and-Replenishment.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.032258065,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.031778058,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.031746032,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.030679157,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 10
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.014285714
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Areas.md",
+          "score": 0.030330882,
+          "source_ranks": {
+            "bm25": 8,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.014705882,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.029631255,
+          "source_ranks": {
+            "bm25": 7,
+            "dense": 8
+          },
+          "source_contributions": {
+            "bm25": 0.014925373,
+            "dense": 0.014705882
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "bm25": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015625
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "dense": 5
+          },
+          "source_contributions": {
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "dense": 6
+          },
+          "source_contributions": {
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Roadmap-and-Status.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "bm25": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015151515
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.386853,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.624051,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.624051,
+          "mrr_at_10": 0.5
+        },
+        "dense": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.375949,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.375949,
+          "mrr_at_10": 0.5
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-007",
+      "question": "How does a GTP work cycle use one stock handling unit for several orders, and what happens on a short pick?",
+      "split": "dev",
+      "language": "en",
+      "category": "process",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+        "openwcs-wiki/Goods-to-Person-Stations.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.032002048,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.032002048,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/adr/0006-gtp-station-execution.md",
+          "score": 0.031778058,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/contracts/openapi/gtp.yaml",
+          "score": 0.029877369,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.029857398,
+          "source_ranks": {
+            "bm25": 8,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.014705882,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/AI-Assistant.md",
+          "score": 0.016393443,
+          "source_ranks": {
+            "bm25": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "bm25": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015625
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "dense": 4
+          },
+          "source_contributions": {
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Getting-Started.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "bm25": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/contracts/openapi/inventory.yaml",
+          "score": 0.014925373,
+          "source_ranks": {
+            "bm25": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 0.693426,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.693426,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.693426,
+        "mrr_at_10": 0.5
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.543771,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.543771,
+          "mrr_at_10": 0.333333
+        },
+        "dense": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.386852,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.149655,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.149655,
+          "mrr_at_10": 0.166667
+        },
+        "dense": {
+          "recall_at_1": -0.5,
+          "precision_at_1": -1.0,
+          "ndcg_at_1": -1.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": -0.306574,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": -0.306574,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.306574,
+          "mrr_at_10": -0.5
+        }
+      },
+      "first_relevant_rank": 2
+    },
+    {
+      "id": "wcs-dev-008",
+      "question": "Which concurrency mechanisms let scheduled work, loop capacity and stock reservation remain correct across replicas?",
+      "split": "dev",
+      "language": "en",
+      "category": "reliability",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/SCALING.md",
+        "openwcs-wiki/Horizontal-Scaling.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/SCALING.md",
+          "score": 0.032266458,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.032018443,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Horizontal-Scaling.md",
+          "score": 0.031280547,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.031009615,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.030309989,
+          "source_ranks": {
+            "bm25": 7,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.014925373,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.029198636,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 8
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.014705882
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.016129032,
+          "source_ranks": {
+            "dense": 2
+          },
+          "source_contributions": {
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Deployment-Guide.md",
+          "score": 0.015873016,
+          "source_ranks": {
+            "bm25": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Mobile-Process-Designer.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "bm25": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Process-Designer.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "dense": 7
+          },
+          "source_contributions": {
+            "dense": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 0.919721,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.919721,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.919721,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.306574,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.524981,
+          "mrr_at_10": 0.333333
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": -0.080279,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": -0.080279,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.080279,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.613147,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.39474,
+          "mrr_at_10": 0.666667
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-009",
+      "question": "In scan-driven conveyance, which component decides routes and which component reports physical progress?",
+      "split": "dev",
+      "language": "en",
+      "category": "equipment",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md",
+        "openwcs-repo/docs/AS-BUILT.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md",
+          "score": 0.032522475,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.030776515,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.030536131,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.030117754,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 9
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.014492754
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/contracts/openapi/flow-orchestrator.yaml",
+          "score": 0.016393443,
+          "source_ranks": {
+            "dense": 1
+          },
+          "source_contributions": {
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.016129032,
+          "source_ranks": {
+            "bm25": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016129032
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+          "score": 0.015873016,
+          "source_ranks": {
+            "bm25": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Transport-Overview.md",
+          "score": 0.015873016,
+          "source_ranks": {
+            "dense": 3
+          },
+          "source_contributions": {
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Reporting.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "dense": 5
+          },
+          "source_contributions": {
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/services/equipment-emulator/README.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "bm25": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 0.919721,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.919721,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.919721,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.850345,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.850345,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.386853,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.386853,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.60526,
+          "mrr_at_10": 0.5
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.069376,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.069376,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.532868,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.532868,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.314461,
+          "mrr_at_10": 0.5
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-010",
+      "question": "Why must a blocker relocation in a double-deep channel stay on the same cellY, and who plans and executes it?",
+      "split": "dev",
+      "language": "en",
+      "category": "equipment",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+        "openwcs-repo/docs/AS-BUILT.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+          "score": 0.032786885,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.032258065,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.031009615,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.030798389,
+          "source_ranks": {
+            "bm25": 7,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.014925373,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.030578898,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 8
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.014705882
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/process-designer-spec.md",
+          "score": 0.029877369,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 9
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.014492754
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md",
+          "score": 0.029437229,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 10
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.014285714
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Transport-Overview.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "dense": 4
+          },
+          "source_contributions": {
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Hardware-Visualisation.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "dense": 6
+          },
+          "source_contributions": {
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "dense": 7
+          },
+          "source_contributions": {
+            "dense": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 0.919721,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.919721,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.919721,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.877215,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.877215,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.850345,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.850345,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.042506,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.042506,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.306574,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.069376,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.069376,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-dev-011",
+      "question": "How can current stock be rebuilt from the transaction history in openWCS?",
+      "split": "dev",
+      "language": "en",
+      "category": "inventory",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/AS-BUILT.md",
+        "openwcs-repo/services/txlog/README.md",
+        "openwcs-repo/services/inventory/README.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.032522475,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.031544958,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.031513648,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/contracts/openapi/inventory.yaml",
+          "score": 0.030578898,
+          "source_ranks": {
+            "bm25": 8,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.014705882,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/contracts/openapi/counting.yaml",
+          "score": 0.030536131,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.030117754,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 9
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.014492754
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/contracts/openapi/txlog.yaml",
+          "score": 0.029910714,
+          "source_ranks": {
+            "bm25": 10,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.014285714,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.029850746,
+          "source_ranks": {
+            "bm25": 7,
+            "dense": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014925373,
+            "dense": 0.014925373
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.015873016,
+          "source_ranks": {
+            "bm25": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.014705882,
+          "source_ranks": {
+            "dense": 8
+          },
+          "source_contributions": {
+            "dense": 0.014705882
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.333333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.296082,
+        "recall_at_5": 0.333333,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.296082,
+        "recall_at_10": 0.333333,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 0.296082,
+        "mrr_at_10": 0.5
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.333333,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.16716,
+          "mrr_at_10": 0.166667
+        },
+        "dense": {
+          "recall_at_1": 0.333333,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.469279,
+          "recall_at_5": 0.333333,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.469279,
+          "recall_at_10": 0.333333,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.469279,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.296082,
+          "recall_at_5": 0.333333,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.296082,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.128922,
+          "mrr_at_10": 0.333333
+        },
+        "dense": {
+          "recall_at_1": -0.333333,
+          "precision_at_1": -1.0,
+          "ndcg_at_1": -1.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": -0.173197,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": -0.173197,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.173197,
+          "mrr_at_10": -0.5
+        }
+      },
+      "first_relevant_rank": 2
+    },
+    {
+      "id": "wcs-dev-012",
+      "question": "What prevents a newly published handheld process definition from changing work that is already in progress?",
+      "split": "dev",
+      "language": "en",
+      "category": "process",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/process-designer-spec.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/process-designer-spec.md",
+          "score": 0.032266458,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Process-Designer.md",
+          "score": 0.032266458,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.032258065,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/contracts/openapi/process-designer.yaml",
+          "score": 0.03125,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Mobile-Process-Designer.md",
+          "score": 0.030536131,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.030076888,
+          "source_ranks": {
+            "bm25": 7,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.014925373,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.029411765,
+          "source_ranks": {
+            "bm25": 8,
+            "dense": 8
+          },
+          "source_contributions": {
+            "bm25": 0.014705882,
+            "dense": 0.014705882
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Deployment-Guide.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "bm25": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015384615
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Roadmap-and-Status.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "dense": 7
+          },
+          "source_contributions": {
+            "dense": 0.014925373
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/contracts/openapi/order-management.yaml",
+          "score": 0.014492754,
+          "source_ranks": {
+            "bm25": 9
+          },
+          "source_contributions": {
+            "bm25": 0.014492754
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 1.0,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.1,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.5,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.5,
+          "mrr_at_10": 0.333333
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 1.0,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.5,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.5,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.5,
+          "mrr_at_10": 0.666667
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-test-001",
+      "question": "How does the canonical Host API prevent retries from duplicating writes, and how are failed webhook deliveries resumed?",
+      "split": "test",
+      "language": "en",
+      "category": "integration",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/AS-BUILT.md",
+        "openwcs-repo/services/integration-host/README.md",
+        "openwcs-repo/contracts/openapi/host-api.yaml",
+        "openwcs-wiki/Host-Integration.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.031778058,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.031754032,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/services/integration-host/README.md",
+          "score": 0.031513648,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Host-Integration.md",
+          "score": 0.03030303,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/contracts/openapi/host-api.yaml",
+          "score": 0.016393443,
+          "source_ranks": {
+            "bm25": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.015873016,
+          "source_ranks": {
+            "bm25": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Dashboards.md",
+          "score": 0.015873016,
+          "source_ranks": {
+            "dense": 3
+          },
+          "source_contributions": {
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Areas.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "dense": 4
+          },
+          "source_contributions": {
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Goods-to-Person-Stations.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "bm25": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014925373
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Slotting-and-Replenishment.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "dense": 7
+          },
+          "source_contributions": {
+            "dense": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.25,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 0.5,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 0.703918,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.8,
+        "ndcg_at_5": 0.904717,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.4,
+        "ndcg_at_10": 0.904717,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.25,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 0.765361,
+          "recall_at_5": 0.75,
+          "precision_at_5": 0.6,
+          "ndcg_at_5": 0.787702,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.4,
+          "ndcg_at_10": 0.926758,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 0.25,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.25,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.469279,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.5414,
+          "recall_at_10": 0.75,
+          "precision_at_10": 0.3,
+          "ndcg_at_10": 0.680456,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": -0.061443,
+          "recall_at_5": 0.25,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.117015,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.022041,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.25,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.234639,
+          "recall_at_5": 0.5,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.363317,
+          "recall_at_10": 0.25,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.224261,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-test-002",
+      "question": "Is the default local stack safe to expose publicly, and what must change at the trust boundary?",
+      "split": "test",
+      "language": "en",
+      "category": "security",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/SECURITY.md",
+        "openwcs-wiki/Security.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/SECURITY.md",
+          "score": 0.032522475,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Security.md",
+          "score": 0.032522475,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.031024531,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.030117754,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.030090498,
+          "source_ranks": {
+            "bm25": 8,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.014705882,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.015873016,
+          "source_ranks": {
+            "bm25": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-wiki/Getting-Started.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "bm25": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015625
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "bm25": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015384615
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Outbound-Flow.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "dense": 6
+          },
+          "source_contributions": {
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Dashboards.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "dense": 7
+          },
+          "source_contributions": {
+            "dense": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-test-003",
+      "question": "Can a Proposed ADR by itself prove that a warehouse capability is implemented?",
+      "split": "test",
+      "language": "en",
+      "category": "architecture",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/AS-BUILT.md",
+        "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+        "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0007-conveyor-transport-and-workplace-induction.md",
+          "score": 0.031754032,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/docs/adr/0009-double-deep-channel-relocation.md",
+          "score": 0.031754032,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/docs/adr/0008-live-scan-driven-conveyance.md",
+          "score": 0.031746032,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md",
+          "score": 0.031318816,
+          "source_ranks": {
+            "bm25": 7,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.014925373,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.030769231,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+          "score": 0.029198636,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 8
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.014705882
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.028991597,
+          "source_ranks": {
+            "bm25": 8,
+            "dense": 10
+          },
+          "source_contributions": {
+            "bm25": 0.014705882,
+            "dense": 0.014285714
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Security.md",
+          "score": 0.016393443,
+          "source_ranks": {
+            "bm25": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/adr/0007-impl-contract.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "dense": 6
+          },
+          "source_contributions": {
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "bm25": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015151515
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.333333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.234639,
+        "recall_at_5": 0.333333,
+        "precision_at_5": 0.2,
+        "ndcg_at_5": 0.234639,
+        "recall_at_10": 0.666667,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 0.391066,
+        "mrr_at_10": 0.333333
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.234639,
+          "recall_at_5": 0.333333,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.234639,
+          "recall_at_10": 0.666667,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.38268,
+          "mrr_at_10": 0.333333
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.234639,
+          "recall_at_5": 0.333333,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.234639,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.3,
+          "ndcg_at_10": 0.511558,
+          "mrr_at_10": 0.333333
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.008386,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": -0.333333,
+          "precision_at_10": -0.1,
+          "ndcg_at_10": -0.120492,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-test-005",
+      "question": "How does openWCS preserve bounded contexts when inventory references SKU and location data owned elsewhere?",
+      "split": "test",
+      "language": "en",
+      "category": "architecture",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+        "openwcs-repo/build.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/docs/adr/0001-inventory-data-ownership.md",
+          "score": 0.032786885,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.031754032,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.031257631,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.031054405,
+          "source_ranks": {
+            "bm25": 7,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.014925373,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.029418127,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.014925373
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Inbound-and-Inventory.md",
+          "score": 0.015873016,
+          "source_ranks": {
+            "dense": 3
+          },
+          "source_contributions": {
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/adr/0002-outbound-allocation-and-cubing.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "bm25": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015625
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-wiki/Process-Designer.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "bm25": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015384615
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "dense": 6
+          },
+          "source_contributions": {
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "bm25": 6
+          },
+          "source_contributions": {
+            "bm25": 0.015151515
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.5,
+        "precision_at_1": 1.0,
+        "ndcg_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "precision_at_3": 0.666667,
+        "ndcg_at_3": 1.0,
+        "recall_at_5": 1.0,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 1.0,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.2,
+        "ndcg_at_10": 1.0,
+        "mrr_at_10": 1.0
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 1.0,
+          "precision_at_3": 0.666667,
+          "ndcg_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 1.0,
+          "mrr_at_10": 1.0
+        },
+        "dense": {
+          "recall_at_1": 0.5,
+          "precision_at_1": 1.0,
+          "ndcg_at_1": 1.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.613147,
+          "recall_at_5": 1.0,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.877215,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.877215,
+          "mrr_at_10": 1.0
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "precision_at_3": 0.333334,
+          "ndcg_at_3": 0.386853,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.122785,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": 0.122785,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 1
+    },
+    {
+      "id": "wcs-test-006",
+      "question": "Qual é a fronteira de responsabilidade entre o ERP ou WMS, o openWCS e os adaptadores dos equipamentos?",
+      "split": "test",
+      "language": "pt-BR",
+      "category": "architecture",
+      "answerable": true,
+      "relevant_documents": [
+        "openwcs-repo/README.md",
+        "openwcs-wiki/Architecture.md",
+        "openwcs-wiki/Equipment-Integration.md"
+      ],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.032522475,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Home.md",
+          "score": 0.032522475,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-repo/README.md",
+          "score": 0.031746032,
+          "source_ranks": {
+            "bm25": 3,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-wiki/Architecture.md",
+          "score": 0.030776515,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 4
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/contracts/openapi/host-api.yaml",
+          "score": 0.029910714,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 10
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.014285714
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Host-Integration.md",
+          "score": 0.029877369,
+          "source_ranks": {
+            "bm25": 5,
+            "dense": 9
+          },
+          "source_contributions": {
+            "bm25": 0.015384615,
+            "dense": 0.014492754
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.029418127,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.014925373
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "dense": 5
+          },
+          "source_contributions": {
+            "dense": 0.015384615
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-wiki/Equipment-Integration.md",
+          "score": 0.015151515,
+          "source_ranks": {
+            "dense": 6
+          },
+          "source_contributions": {
+            "dense": 0.015151515
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-wiki/Internationalisation.md",
+          "score": 0.014925373,
+          "source_ranks": {
+            "bm25": 7
+          },
+          "source_contributions": {
+            "bm25": 0.014925373
+          }
+        }
+      ],
+      "metrics": {
+        "recall_at_1": 0.0,
+        "precision_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "recall_at_3": 0.333333,
+        "precision_at_3": 0.333333,
+        "ndcg_at_3": 0.234639,
+        "recall_at_5": 0.666667,
+        "precision_at_5": 0.4,
+        "ndcg_at_5": 0.436747,
+        "recall_at_10": 1.0,
+        "precision_at_10": 0.3,
+        "ndcg_at_10": 0.578014,
+        "mrr_at_10": 0.333333
+      },
+      "source_metrics": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.234639,
+          "recall_at_5": 0.333333,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.234639,
+          "recall_at_10": 0.666667,
+          "precision_at_10": 0.2,
+          "ndcg_at_10": 0.4018,
+          "mrr_at_10": 0.333333
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.333333,
+          "precision_at_3": 0.333333,
+          "ndcg_at_3": 0.234639,
+          "recall_at_5": 0.666667,
+          "precision_at_5": 0.4,
+          "ndcg_at_5": 0.436747,
+          "recall_at_10": 1.0,
+          "precision_at_10": 0.3,
+          "ndcg_at_10": 0.603907,
+          "mrr_at_10": 0.333333
+        }
+      },
+      "metric_deltas": {
+        "bm25": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.333334,
+          "precision_at_5": 0.2,
+          "ndcg_at_5": 0.202108,
+          "recall_at_10": 0.333333,
+          "precision_at_10": 0.1,
+          "ndcg_at_10": 0.176214,
+          "mrr_at_10": 0.0
+        },
+        "dense": {
+          "recall_at_1": 0.0,
+          "precision_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "precision_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "precision_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "recall_at_10": 0.0,
+          "precision_at_10": 0.0,
+          "ndcg_at_10": -0.025893,
+          "mrr_at_10": 0.0
+        }
+      },
+      "first_relevant_rank": 3
+    },
+    {
+      "id": "wcs-test-004",
+      "question": "What is the production password for the proprietary PLC controlling customer warehouse line 7?",
+      "split": "test",
+      "language": "en",
+      "category": "unanswerable",
+      "answerable": false,
+      "relevant_documents": [],
+      "retrieved_documents": [
+        {
+          "rank": 1,
+          "document_id": "openwcs-repo/build.md",
+          "score": 0.032258065,
+          "source_ranks": {
+            "bm25": 2,
+            "dense": 2
+          },
+          "source_contributions": {
+            "bm25": 0.016129032,
+            "dense": 0.016129032
+          }
+        },
+        {
+          "rank": 2,
+          "document_id": "openwcs-wiki/Deployment-Guide.md",
+          "score": 0.031318816,
+          "source_ranks": {
+            "bm25": 1,
+            "dense": 7
+          },
+          "source_contributions": {
+            "bm25": 0.016393443,
+            "dense": 0.014925373
+          }
+        },
+        {
+          "rank": 3,
+          "document_id": "openwcs-wiki/Services.md",
+          "score": 0.031024531,
+          "source_ranks": {
+            "bm25": 6,
+            "dense": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015151515,
+            "dense": 0.015873016
+          }
+        },
+        {
+          "rank": 4,
+          "document_id": "openwcs-repo/docs/AS-BUILT.md",
+          "score": 0.030886196,
+          "source_ranks": {
+            "bm25": 9,
+            "dense": 1
+          },
+          "source_contributions": {
+            "bm25": 0.014492754,
+            "dense": 0.016393443
+          }
+        },
+        {
+          "rank": 5,
+          "document_id": "openwcs-repo/docs/process-designer-spec.md",
+          "score": 0.030117754,
+          "source_ranks": {
+            "bm25": 4,
+            "dense": 9
+          },
+          "source_contributions": {
+            "bm25": 0.015625,
+            "dense": 0.014492754
+          }
+        },
+        {
+          "rank": 6,
+          "document_id": "openwcs-wiki/Process-Designer.md",
+          "score": 0.028571429,
+          "source_ranks": {
+            "bm25": 10,
+            "dense": 10
+          },
+          "source_contributions": {
+            "bm25": 0.014285714,
+            "dense": 0.014285714
+          }
+        },
+        {
+          "rank": 7,
+          "document_id": "openwcs-repo/contracts/openapi/process-designer.yaml",
+          "score": 0.015873016,
+          "source_ranks": {
+            "bm25": 3
+          },
+          "source_contributions": {
+            "bm25": 0.015873016
+          }
+        },
+        {
+          "rank": 8,
+          "document_id": "openwcs-repo/docs/adr/0003-slotting-and-replenishment.md",
+          "score": 0.015625,
+          "source_ranks": {
+            "dense": 4
+          },
+          "source_contributions": {
+            "dense": 0.015625
+          }
+        },
+        {
+          "rank": 9,
+          "document_id": "openwcs-repo/SECURITY.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "bm25": 5
+          },
+          "source_contributions": {
+            "bm25": 0.015384615
+          }
+        },
+        {
+          "rank": 10,
+          "document_id": "openwcs-repo/docs/DEVELOPMENT-STATUS.md",
+          "score": 0.015384615,
+          "source_ranks": {
+            "dense": 5
+          },
+          "source_contributions": {
+            "dense": 0.015384615
+          }
+        }
+      ],
+      "evaluation": "excluded_from_retrieval_metrics"
+    }
+  ]
+}

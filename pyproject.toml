@@ -34,6 +34,7 @@ wcs-build-index = "wcs_rag_evals.build_index:main"
 wcs-eval-bm25 = "wcs_rag_evals.evaluate_bm25:main"
 wcs-build-vector-index = "wcs_rag_evals.build_vector_index:main"
 wcs-eval-vector = "wcs_rag_evals.evaluate_vector:main"
+wcs-eval-hybrid = "wcs_rag_evals.evaluate_hybrid:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wcs_rag_evals"]
