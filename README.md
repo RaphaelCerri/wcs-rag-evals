@@ -6,7 +6,7 @@ O domínio escolhido é logística e automação de armazéns. O corpus inicial 
 
 ## Estado atual
 
-**Fase 5, baseline de resposta fundamentada medido.** O projeto já contém:
+**Fase 7 concluída, com regression gates ativos no CI.** O projeto já contém:
 
 - manifesto reproduzível de fontes e revisões;
 - ingestão allowlist, sem republicar o corpus de terceiro;
@@ -24,8 +24,18 @@ O domínio escolhido é logística e automação de armazéns. O corpus inicial 
 - gates predefinidos de qualidade e latência que impediram promover uma regressão;
 - baseline extrativo com citações válidas, recusa determinística e controle sem retrieval;
 - candidato Qwen local avaliado em `dev` e rejeitado antes de abrir `test`.
+- pacote de calibração semântica com rubrica, adjudicação independente por agentes e proveniência
+  explícita, sem apresentar proxy de agentes como rótulo humano;
+- execução de calibration e validation separada por selo criptográfico de prompt, schema,
+  configuração, labels e relatório;
+- probes de estabilidade para diferentes ordens de evidência;
+- gates de regressão no GitHub Actions para retrieval, geração e hashes de proveniência.
 
 O Hybrid RRF permanece como retrieval recomendado. O baseline extrativo é seguro e rápido, mas não substitui síntese semântica: sua cobertura de fatos e precisão de citações relevantes ainda são limitadas. Não há LLM promovido nem API; o primeiro candidato local falhou nos gates de `dev`.
+
+O judge por API ainda não foi executado porque `OPENAI_API_KEY` não está configurada. Os labels
+atuais são identificados como `model_assisted_adjudication`, não como ground truth humano. Essa
+limitação permanece visível em vez de ser convertida em uma claim de calibração humana.
 
 ## Resultado do baseline
 
