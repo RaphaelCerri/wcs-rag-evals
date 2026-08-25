@@ -41,7 +41,7 @@ Compara resultados contra o golden set. Métricas determinísticas de retrieval 
 - YAML para manifesto humano de fontes.
 - Conteúdo bruto e índices reconstruíveis fora do Git; métricas agregadas e rankings publicados em `evals/results/`.
 - Revisões de corpus sempre fixadas por SHA completo.
-- Nenhuma chave de API é necessária nas Fases 0, 1, 2 e 3.
+- Nenhuma chave de API é necessária nas Fases 0 a 4.
 
 ## Decisões da Fase 1
 
@@ -76,9 +76,18 @@ Compara resultados contra o golden set. Métricas determinísticas de retrieval 
 - Ranks e contribuição de cada retriever preservados por documento no relatório JSON.
 - Nenhum reranker incluído nesta fase, mantendo isolado o efeito da rank fusion.
 
+## Decisões da Fase 4
+
+- Cross-encoder multilíngue `mmarco-mMiniLMv2-L12-H384-v1` fixado por SHA completo.
+- Top 10 do Hybrid RRF usado como conjunto imutável de candidatos.
+- Melhor chunk de cada fonte lexical e vetorial preservado por documento; o maior score do cross-encoder define o score do documento.
+- Gates declarados antes da execução: delta de nDCG@10 em `dev` de pelo menos 0,010, nenhuma regressão de nDCG@10 em `test` e p95 de até 15 segundos em CPU.
+- Métricas de qualidade mantidas em artefato determinístico e tempos isolados em benchmark dependente da máquina.
+- Reranker rejeitado após regressão nos dois splits, apesar de cumprir o orçamento de latência.
+- Hybrid RRF permanece como configuração recomendada, evitando inferência adicional sem ganho comprovado.
+
 ## Próximas decisões
 
-- reranker;
 - provedor e protocolo de geração.
 
 Cada decisão será tomada depois da métrica anterior existir.

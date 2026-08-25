@@ -1,12 +1,12 @@
 # WCS RAG Evals
 
-Sistema de RAG orientado a avaliação sobre documentação pública de Warehouse Control Systems. O projeto será construído a partir de baselines mensuráveis: antes de adicionar embeddings, busca híbrida ou reranking, cada mudança precisa provar que melhorou retrieval, resposta ou custo contra um golden set versionado.
+Sistema de RAG orientado a avaliação sobre documentação pública de Warehouse Control Systems. O projeto evolui a partir de baselines mensuráveis: antes de promover embeddings, busca híbrida ou reranking, cada mudança precisa provar que melhorou retrieval, resposta ou custo contra um golden set versionado.
 
 O domínio escolhido é logística e automação de armazéns. O corpus inicial usa a documentação pública do [openWCS](https://github.com/brettljausn-ai/openwcs), fixada por commit e baixada por script. Nenhum dado, documento ou nome de cliente da experiência profissional do autor faz parte do projeto.
 
 ## Estado atual
 
-**Fase 3, retrieval híbrido medido.** O projeto já contém:
+**Fase 4, reranker medido e rejeitado.** O projeto já contém:
 
 - manifesto reproduzível de fontes e revisões;
 - ingestão allowlist, sem republicar o corpus de terceiro;
@@ -19,9 +19,11 @@ O domínio escolhido é logística e automação de armazéns. O corpus inicial 
 - índice HNSW disponível para escala e busca exata usada no corpus atual;
 - Reciprocal Rank Fusion com parâmetros selecionados exclusivamente em `dev`;
 - Recall@k, Precision@k, MRR@10 e nDCG@k calculados por caso e por split;
-- comparação reproduzível entre retrieval lexical, vetorial e híbrido.
+- comparação reproduzível entre retrieval lexical, vetorial e híbrido;
+- avaliação de cross-encoder multilíngue com modelo e revisão fixados;
+- gates predefinidos de qualidade e latência que impediram promover uma regressão.
 
-Ainda não há reranker, geração por LLM ou API. Esses componentes entram nas próximas fases e precisarão justificar sua complexidade sob os mesmos casos.
+O reranker existe como experimento auditável, mas não integra a configuração recomendada porque piorou nDCG@10 em `dev` e `test`. Ainda não há geração por LLM ou API; esses componentes precisarão justificar sua complexidade sob os mesmos casos.
 
 ## Resultado do baseline
 
@@ -69,6 +71,23 @@ O híbrido aumentou Recall@5 de teste em 0,117 contra BM25 e em 0,100 contra den
 
 Veja o [relatório híbrido](evals/results/hybrid-v0.1.md) ou o [artefato auditável em JSON](evals/results/hybrid-v0.1.json).
 
+## Resultado do reranker
+
+O experimento reordenou o top 10 do Hybrid RRF com o cross-encoder multilíngue [`mmarco-mMiniLMv2-L12-H384-v1`](https://huggingface.co/cross-encoder/mmarco-mMiniLMv2-L12-H384-v1), fixado por revisão. Antes da execução foram definidos três gates: ganho mínimo de 0,010 em nDCG@10 de `dev`, nenhuma regressão em nDCG@10 de `test` e p95 de até 15 segundos por consulta em CPU.
+
+| Grupo | Sistema | Recall@5 | MRR@10 | nDCG@10 |
+|---|---|---:|---:|---:|
+| Todos | **Hybrid RRF** | **0,873** | **0,794** | **0,809** |
+| Todos | Reranker | 0,779 | 0,745 | 0,741 |
+| Dev | **Hybrid RRF** | **0,903** | **0,819** | **0,823** |
+| Dev | Reranker | 0,819 | 0,736 | 0,739 |
+| Test | **Hybrid RRF** | **0,800** | 0,733 | **0,775** |
+| Test | Reranker | 0,683 | **0,767** | 0,746 |
+
+O p95 do artefato final foi 13,99 segundos e passou no orçamento, mas nDCG@10 caiu 0,083 em `dev` e 0,029 em `test`. O ganho isolado de MRR@10 em `test` não compensa a regressão ampla. A decisão foi manter o Hybrid RRF e publicar o resultado negativo, evitando custo e complexidade sem ganho comprovado.
+
+Veja o [relatório do reranker](evals/results/reranker-v0.1.md), o [benchmark em CPU](evals/results/reranker-benchmark-v0.1.md) ou os artefatos JSON correspondentes.
+
 ## Por que avaliação primeiro
 
 Uma demonstração de RAG pode produzir uma resposta convincente mesmo recuperando documentos errados. Este projeto separa quatro perguntas:
@@ -106,6 +125,7 @@ $env:WCS_DATABASE_URL = "postgresql://wcs:wcs_local_only@localhost:55432/wcs_rag
 wcs-build-vector-index
 wcs-eval-vector
 wcs-eval-hybrid
+wcs-eval-reranker
 pytest
 ```
 
@@ -117,7 +137,7 @@ pytest
 | 1 | Baseline lexical BM25 | concluída: métricas de retrieval publicadas |
 | 2 | Embeddings e pgvector | concluída: ganhos de cobertura e gap pt-BR medidos |
 | 3 | Retrieval híbrido e rank fusion | concluída: ganho de Recall@5 e nDCG em dev e test |
-| 4 | Reranker | melhoria maior que custo e latência adicionais |
+| 4 | Reranker | concluída: latência aprovada, qualidade reprovada; Hybrid RRF mantido |
 | 5 | Geração com citações | faithfulness e citation correctness medidas |
 | 6 | LLM-as-judge calibrado | concordância comparada com rótulo humano |
 | 7 | Regression gate e observabilidade | CI falha em regressão deliberada |

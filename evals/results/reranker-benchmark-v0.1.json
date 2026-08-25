@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "experiment": "cross-encoder-reranker-benchmark-v0.1",
+  "model": {
+    "id": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "1427fd652930e4ba29e8149678df786c240d8825"
+  },
+  "runtime": {
+    "device": "cpu",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "batch_size": 16,
+    "warmup_excluded": true
+  },
+  "workload": {
+    "query_count": 18,
+    "candidate_depth": 10,
+    "passage_pairs_total": 244,
+    "passage_pairs_per_query": [
+      14,
+      11,
+      14,
+      13,
+      12,
+      14,
+      13,
+      13,
+      14,
+      14,
+      14,
+      14,
+      12,
+      14,
+      17,
+      15,
+      13,
+      13
+    ]
+  },
+  "query_latency_ms": [
+    9403.434,
+    7046.286,
+    8517.532,
+    9168.793,
+    8134.463,
+    13987.502,
+    11396.559,
+    9106.852,
+    9639.803,
+    9707.083,
+    8555.836,
+    8207.308,
+    7084.513,
+    8176.429,
+    9402.205,
+    9778.921,
+    11022.377,
+    10868.245
+  ],
+  "summary_ms": {
+    "p50": 9285.499,
+    "p95_nearest_rank": 13987.502,
+    "max": 13987.502,
+    "total": 169204.14
+  },
+  "latency_gate": {
+    "metric": "p95_nearest_rank_ms",
+    "maximum": 15000.0,
+    "passed": true
+  },
+  "acceptance": {
+    "quality_passed": false,
+    "latency_passed": true,
+    "accepted": false
+  }
+}

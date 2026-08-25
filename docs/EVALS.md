@@ -41,6 +41,10 @@ O retrieval híbrido seleciona parâmetros apenas em `dev` e registra todos os t
 
 Comparação dos três retrievers: [`evals/results/hybrid-v0.1.md`](../evals/results/hybrid-v0.1.md).
 
+O reranker foi submetido a critérios registrados antes da inferência. O modelo precisava elevar nDCG@10 de `dev` em pelo menos 0,010, não regredir nDCG@10 em `test` e manter p95 abaixo de 15 segundos por consulta em CPU. A latência passou, mas a qualidade falhou nos dois splits. O experimento permanece publicado e o Hybrid RRF continua como baseline recomendado.
+
+Resultados: [qualidade do reranker](../evals/results/reranker-v0.1.md) e [benchmark em CPU](../evals/results/reranker-benchmark-v0.1.md).
+
 ### Geração
 
 - cobertura de fatos obrigatórios;
