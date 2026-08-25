@@ -89,4 +89,9 @@ O corpus contém documentação com níveis diferentes de autoridade. Um ADR pod
 
 ## Regression gate
 
-Os limites só serão definidos depois do primeiro baseline. O gate não será calibrado para fazer a implementação atual passar. Uma regressão deliberada deverá falhar o CI como teste do próprio gate.
+Os limites foram registrados depois do baseline e mantêm margem explícita abaixo dos valores
+observados. `wcs-check-regressions` protege qualidade e hashes de proveniência dos artifacts
+versionados. Um teste reduz deliberadamente Recall@5 de test para zero e confirma a falha do gate.
+
+O CI leve não regenera embeddings ou pgvector. Essa limitação está documentada e impede apresentar
+validação de artifacts como execução full-stack. Detalhes: [`docs/REGRESSION_GATES.md`](REGRESSION_GATES.md).

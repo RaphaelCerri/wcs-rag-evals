@@ -46,6 +46,7 @@ wcs-eval-reranker = "wcs_rag_evals.evaluate_reranker:main"
 wcs-eval-generation = "wcs_rag_evals.evaluate_generation:main"
 wcs-build-judge-packet = "wcs_rag_evals.build_judge_packet:main"
 wcs-eval-judge = "wcs_rag_evals.evaluate_judge:main"
+wcs-check-regressions = "wcs_rag_evals.regression_gate:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wcs_rag_evals"]

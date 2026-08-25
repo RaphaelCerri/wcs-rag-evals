@@ -147,6 +147,7 @@ wcs-eval-hybrid
 wcs-eval-reranker
 wcs-eval-generation
 wcs-build-judge-packet
+wcs-check-regressions
 pytest
 ```
 
@@ -161,13 +162,14 @@ pytest
 | 4 | Reranker | concluída: latência aprovada, qualidade reprovada; Hybrid RRF mantido |
 | 5 | Geração com citações | concluída: baseline extrativo aceito; Qwen local rejeitado em dev |
 | 6 | LLM-as-judge calibrado | revisão por agentes concluída; protocolo selado, API pendente |
-| 7 | Regression gate e observabilidade | CI falha em regressão deliberada |
+| 7 | Regression gate e observabilidade | concluída: CI protege métricas e proveniência |
 
 ## Documentação
 
 - [Arquitetura](docs/ARCHITECTURE.md)
 - [Estratégia de avaliação](docs/EVALS.md)
 - [Protocolo de calibração do judge](docs/JUDGE_CALIBRATION.md)
+- [Regression gates](docs/REGRESSION_GATES.md)
 - [Política do corpus](corpus/README.md)
 
 ## Processo de desenvolvimento

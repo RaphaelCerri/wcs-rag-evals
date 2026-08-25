@@ -17,10 +17,11 @@ jobs:
         run: python -m pip install -e ".[dev]"
       - name: Validate contracts and golden set
         run: wcs-validate-evals
+      - name: Enforce evaluation regression gates
+        run: wcs-check-regressions
       - name: Test
         run: pytest
       - name: Lint
         run: ruff check .
       - name: Format
         run: ruff format --check .
-

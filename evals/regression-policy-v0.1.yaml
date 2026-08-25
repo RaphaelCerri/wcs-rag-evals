@@ -1,0 +1,69 @@
+schema_version: "1.0"
+policy_id: wcs-regression-v0.1
+baseline_commit: 3b59dd4872a10980bbe66f42fe4e5b28c3a6ebcb
+
+artifacts:
+  hybrid: evals/results/hybrid-v0.1.json
+  generation: evals/results/generation-v0.1.json
+
+checks:
+  - id: hybrid_all_recall_at_5
+    artifact: hybrid
+    path: summaries.all.recall_at_5
+    operator: gte
+    threshold: 0.85
+  - id: hybrid_all_ndcg_at_10
+    artifact: hybrid
+    path: summaries.all.ndcg_at_10
+    operator: gte
+    threshold: 0.79
+  - id: hybrid_test_recall_at_5
+    artifact: hybrid
+    path: summaries.test.recall_at_5
+    operator: gte
+    threshold: 0.78
+  - id: hybrid_test_ndcg_at_10
+    artifact: hybrid
+    path: summaries.test.ndcg_at_10
+    operator: gte
+    threshold: 0.75
+  - id: generation_schema_valid
+    artifact: generation
+    path: summaries.all.grounded.schema_valid
+    operator: gte
+    threshold: 1.0
+  - id: generation_answerability
+    artifact: generation
+    path: summaries.all.grounded.answerability_correct
+    operator: gte
+    threshold: 1.0
+  - id: generation_citation_valid
+    artifact: generation
+    path: summaries.all.grounded.citation_valid
+    operator: gte
+    threshold: 1.0
+  - id: generation_fact_coverage_proxy
+    artifact: generation
+    path: summaries.all.grounded.required_fact_coverage_proxy
+    operator: gte
+    threshold: 0.30
+  - id: generation_gold_citation_precision
+    artifact: generation
+    path: summaries.all.grounded.gold_citation_precision
+    operator: gte
+    threshold: 0.45
+  - id: generation_gold_citation_recall
+    artifact: generation
+    path: summaries.all.grounded.gold_citation_recall
+    operator: gte
+    threshold: 0.80
+  - id: generation_forbidden_claim_hits
+    artifact: generation
+    path: summaries.all.grounded.forbidden_claim_lexical_hits
+    operator: lte
+    threshold: 0.0
+
+known_gaps:
+  - pt-BR possui somente um caso e fact coverage lexical igual a zero; não existe gate agregado válido.
+  - métricas semânticas aguardam execução do judge da Fase 6.
+  - CI valida artifacts versionados; regeneração full-stack permanece uma execução separada.
