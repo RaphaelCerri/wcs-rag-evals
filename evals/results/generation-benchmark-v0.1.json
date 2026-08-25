@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "experiment": "extractive-generation-benchmark-v0.1",
+  "generator": "extractive-evidence-v0.1",
+  "runtime": {
+    "device": "cpu",
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cache_path": ".data/generation/extractive-v0.1.json"
+  },
+  "workload": {
+    "case_count": 18,
+    "generation_count": 36,
+    "modes": [
+      "grounded",
+      "no_retrieval"
+    ]
+  },
+  "latency_ms": {
+    "grounded": [
+      3.416,
+      1.926,
+      4.396,
+      3.112,
+      1.822,
+      4.065,
+      2.578,
+      1.951,
+      3.763,
+      5.771,
+      1.94,
+      3.662,
+      2.382,
+      3.995,
+      2.796,
+      1.051,
+      2.0,
+      1.683
+    ],
+    "no_retrieval": [
+      0.845,
+      0.754,
+      0.689,
+      0.799,
+      0.362,
+      0.641,
+      0.729,
+      0.402,
+      0.623,
+      0.498,
+      0.43,
+      0.896,
+      1.095,
+      1.224,
+      0.816,
+      0.863,
+      0.404,
+      0.393
+    ]
+  },
+  "summary_ms": {
+    "grounded": {
+      "p50": 2.687,
+      "p95_nearest_rank": 5.771,
+      "max": 5.771,
+      "total": 52.309
+    },
+    "no_retrieval": {
+      "p50": 0.709,
+      "p95_nearest_rank": 1.224,
+      "max": 1.224,
+      "total": 12.463
+    }
+  },
+  "tokens": {
+    "grounded": {
+      "input_total": 8987,
+      "output_total": 2334
+    },
+    "no_retrieval": {
+      "input_total": 0,
+      "output_total": 233
+    }
+  },
+  "cost": {
+    "provider_api_cost_usd": 0.0,
+    "local_compute_not_monetized": true
+  },
+  "latency_gate": {
+    "metric": "grounded_p95_nearest_rank_ms",
+    "maximum": 30000.0,
+    "observed": 5.771,
+    "passed": true
+  },
+  "acceptance": {
+    "quality_passed": true,
+    "latency_passed": true,
+    "accepted": true
+  }
+}

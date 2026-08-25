@@ -86,8 +86,21 @@ Compara resultados contra o golden set. Métricas determinísticas de retrieval 
 - Reranker rejeitado após regressão nos dois splits, apesar de cumprir o orçamento de latência.
 - Hybrid RRF permanece como configuração recomendada, evitando inferência adicional sem ganho comprovado.
 
+## Decisões da Fase 5
+
+- Top 3 do Hybrid RRF como contexto, com até dois chunks por documento e 120 palavras por chunk.
+- Baseline extrativo escolhe a sentença com maior sobreposição lexical por documento.
+- Citações são IDs estruturados, nunca texto livre misturado à resposta.
+- Sem retrieval, o baseline recusa em vez de recorrer a conhecimento não fundamentado.
+- Solicitações de segredo, senha, token, credencial ou dado proprietário recebem recusa antes da extração.
+- Respostas e citações são persistidas por caso em cache retomável.
+- Qualidade determinística e benchmark de tempo permanecem em artefatos separados.
+- Qwen 0.5B local foi fixado por revisão e testado somente em `dev`; falhou em estrutura, citações, cobertura e latência.
+- `llama.cpp` com GGUF Q5_K_M reduziu latência contra PyTorch, mas não o suficiente para promover o modelo.
+- O baseline extrativo é o controle seguro, não uma alegação de faithfulness semântica.
+
 ## Próximas decisões
 
-- provedor e protocolo de geração.
+- judge semântico e protocolo de calibração humana.
 
 Cada decisão será tomada depois da métrica anterior existir.

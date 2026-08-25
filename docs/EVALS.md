@@ -47,11 +47,18 @@ Resultados: [qualidade do reranker](../evals/results/reranker-v0.1.md) e [benchm
 
 ### Geração
 
-- cobertura de fatos obrigatórios;
-- incidência de claims proibidos;
-- faithfulness ao contexto;
-- correção das citações;
-- recusa correta em perguntas não respondíveis.
+- cobertura lexical dos fatos obrigatórios, explicitamente marcada como proxy;
+- incidência exata de claims proibidos, sem alegar detecção semântica;
+- validade dos IDs de citação;
+- precision e recall contra documentos relevantes do golden set;
+- sobreposição de bigramas entre resposta e evidência citada;
+- classificação de answerability e recusa correta.
+
+O baseline extrativo passou nos gates estruturais e de operação, mas atingiu apenas 0,328 de cobertura lexical dos fatos e 0,490 de precision das citações relevantes. Esses valores impedem tratá-lo como resposta final, apesar de ele ser útil como controle determinístico e fundamentado.
+
+Faithfulness semântica, answer relevance semântica e entailment entre claim e citação não são inferidos dessas proxies. Eles entram somente com o judge calibrado da Fase 6.
+
+Resultados: [baseline extrativo](../evals/results/generation-v0.1.md) e [benchmark](../evals/results/generation-benchmark-v0.1.md).
 
 ### Operação
 

@@ -6,7 +6,7 @@ O domínio escolhido é logística e automação de armazéns. O corpus inicial 
 
 ## Estado atual
 
-**Fase 4, reranker medido e rejeitado.** O projeto já contém:
+**Fase 5, baseline de resposta fundamentada medido.** O projeto já contém:
 
 - manifesto reproduzível de fontes e revisões;
 - ingestão allowlist, sem republicar o corpus de terceiro;
@@ -21,9 +21,11 @@ O domínio escolhido é logística e automação de armazéns. O corpus inicial 
 - Recall@k, Precision@k, MRR@10 e nDCG@k calculados por caso e por split;
 - comparação reproduzível entre retrieval lexical, vetorial e híbrido;
 - avaliação de cross-encoder multilíngue com modelo e revisão fixados;
-- gates predefinidos de qualidade e latência que impediram promover uma regressão.
+- gates predefinidos de qualidade e latência que impediram promover uma regressão;
+- baseline extrativo com citações válidas, recusa determinística e controle sem retrieval;
+- candidato Qwen local avaliado em `dev` e rejeitado antes de abrir `test`.
 
-O reranker existe como experimento auditável, mas não integra a configuração recomendada porque piorou nDCG@10 em `dev` e `test`. Ainda não há geração por LLM ou API; esses componentes precisarão justificar sua complexidade sob os mesmos casos.
+O Hybrid RRF permanece como retrieval recomendado. O baseline extrativo é seguro e rápido, mas não substitui síntese semântica: sua cobertura de fatos e precisão de citações relevantes ainda são limitadas. Não há LLM promovido nem API; o primeiro candidato local falhou nos gates de `dev`.
 
 ## Resultado do baseline
 
@@ -88,6 +90,23 @@ O p95 do artefato final foi 13,99 segundos e passou no orçamento, mas nDCG@10 c
 
 Veja o [relatório do reranker](evals/results/reranker-v0.1.md), o [benchmark em CPU](evals/results/reranker-benchmark-v0.1.md) ou os artefatos JSON correspondentes.
 
+## Resultado da geração fundamentada
+
+O primeiro baseline de resposta não usa um LLM. Ele seleciona evidências diretamente dos três primeiros documentos do Hybrid RRF, retorna os documentos usados como citações e recusa perguntas sensíveis ou sem fontes. Isso fornece um controle determinístico de custo zero antes de introduzir síntese probabilística.
+
+| Grupo | Fact coverage proxy | Gold citation precision | Gold citation recall | Answerability |
+|---|---:|---:|---:|---:|
+| Todos | 0,328 | 0,490 | 0,824 | 1,000 |
+| Dev | 0,396 | 0,472 | 0,903 | 1,000 |
+| Test | 0,167 | 0,533 | 0,633 | 1,000 |
+| pt-BR | 0,000 | 0,333 | 0,333 | 1,000 |
+
+Os gates estruturais predefinidos passaram: 100% de schema válido, 100% de IDs de citação válidos, recusa correta no caso não respondível, documento relevante citado em 100% dos casos respondíveis e p95 de 5,8 ms. Porém, os números absolutos mostram que o baseline não sintetiza todos os fatos e perde completamente cobertura lexical em português. Passar nesses gates o qualifica como baseline seguro, não como resposta final.
+
+Um candidato local `Qwen2.5-0.5B-Instruct` também foi testado somente em `dev`. PyTorch foi operacionalmente inviável; o runtime foi trocado para `llama.cpp` com GGUF Q5_K_M oficial. Mesmo assim, o candidato obteve apenas 66,7% de schema válido, 33,3% de citações válidas, nenhum caso citando documento relevante, ganho de fact coverage de 0,021 e p95 de 59,2 segundos. Ele foi rejeitado sem avaliação em `test`.
+
+Veja o [relatório de geração](evals/results/generation-v0.1.md), o [benchmark](evals/results/generation-benchmark-v0.1.md) e as [decisões completas](docs/GENERATION.md).
+
 ## Por que avaliação primeiro
 
 Uma demonstração de RAG pode produzir uma resposta convincente mesmo recuperando documentos errados. Este projeto separa quatro perguntas:
@@ -126,6 +145,7 @@ wcs-build-vector-index
 wcs-eval-vector
 wcs-eval-hybrid
 wcs-eval-reranker
+wcs-eval-generation
 pytest
 ```
 
@@ -138,7 +158,7 @@ pytest
 | 2 | Embeddings e pgvector | concluída: ganhos de cobertura e gap pt-BR medidos |
 | 3 | Retrieval híbrido e rank fusion | concluída: ganho de Recall@5 e nDCG em dev e test |
 | 4 | Reranker | concluída: latência aprovada, qualidade reprovada; Hybrid RRF mantido |
-| 5 | Geração com citações | faithfulness e citation correctness medidas |
+| 5 | Geração com citações | concluída: baseline extrativo aceito; Qwen local rejeitado em dev |
 | 6 | LLM-as-judge calibrado | concordância comparada com rótulo humano |
 | 7 | Regression gate e observabilidade | CI falha em regressão deliberada |
 
