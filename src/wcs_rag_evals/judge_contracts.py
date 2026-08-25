@@ -76,15 +76,18 @@ class JudgeVerdict(BaseModel):
 
     @model_validator(mode="after")
     def label_matches_scores(self) -> JudgeVerdict:
-        should_pass = all(
-            score == 2
-            for score in (
-                self.groundedness,
-                self.relevance,
-                self.citation_support,
-                self.completeness,
+        should_pass = (
+            all(
+                score == 2
+                for score in (
+                    self.groundedness,
+                    self.relevance,
+                    self.citation_support,
+                    self.completeness,
+                )
             )
-        ) and not self.error_flags
+            and not self.error_flags
+        )
         if (self.label == "pass") != should_pass:
             raise ValueError("pass requires four scores of 2 and no error flags")
         return self

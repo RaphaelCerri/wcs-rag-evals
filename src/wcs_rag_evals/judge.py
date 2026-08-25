@@ -59,8 +59,7 @@ class JudgeCall:
     @property
     def estimated_cost_usd(self) -> float:
         return (
-            self.input_tokens * INPUT_USD_PER_MILLION
-            + self.output_tokens * OUTPUT_USD_PER_MILLION
+            self.input_tokens * INPUT_USD_PER_MILLION + self.output_tokens * OUTPUT_USD_PER_MILLION
         ) / 1_000_000
 
 
@@ -123,7 +122,5 @@ def cohens_kappa(human: list[str], judge: list[str]) -> float:
     observed = exact_agreement(human, judge)
     labels = set(human) | set(judge)
     total = len(human)
-    expected = sum(
-        (human.count(label) / total) * (judge.count(label) / total) for label in labels
-    )
+    expected = sum((human.count(label) / total) * (judge.count(label) / total) for label in labels)
     return 1.0 if expected == 1.0 and observed == 1.0 else (observed - expected) / (1 - expected)
