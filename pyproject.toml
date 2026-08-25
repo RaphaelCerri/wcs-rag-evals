@@ -30,6 +30,9 @@ generation = [
   "huggingface-hub>=1.4,<2",
   "llama-cpp-python==0.3.35",
 ]
+judge = [
+  "openai>=2,<3",
+]
 
 [project.scripts]
 wcs-fetch-corpus = "wcs_rag_evals.fetch_corpus:main"
@@ -41,6 +44,8 @@ wcs-eval-vector = "wcs_rag_evals.evaluate_vector:main"
 wcs-eval-hybrid = "wcs_rag_evals.evaluate_hybrid:main"
 wcs-eval-reranker = "wcs_rag_evals.evaluate_reranker:main"
 wcs-eval-generation = "wcs_rag_evals.evaluate_generation:main"
+wcs-build-judge-packet = "wcs_rag_evals.build_judge_packet:main"
+wcs-eval-judge = "wcs_rag_evals.evaluate_judge:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wcs_rag_evals"]

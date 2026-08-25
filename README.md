@@ -146,6 +146,7 @@ wcs-eval-vector
 wcs-eval-hybrid
 wcs-eval-reranker
 wcs-eval-generation
+wcs-build-judge-packet
 pytest
 ```
 
@@ -159,13 +160,14 @@ pytest
 | 3 | Retrieval híbrido e rank fusion | concluída: ganho de Recall@5 e nDCG em dev e test |
 | 4 | Reranker | concluída: latência aprovada, qualidade reprovada; Hybrid RRF mantido |
 | 5 | Geração com citações | concluída: baseline extrativo aceito; Qwen local rejeitado em dev |
-| 6 | LLM-as-judge calibrado | concordância comparada com rótulo humano |
+| 6 | LLM-as-judge calibrado | em andamento: infraestrutura pronta, rótulos humanos pendentes |
 | 7 | Regression gate e observabilidade | CI falha em regressão deliberada |
 
 ## Documentação
 
 - [Arquitetura](docs/ARCHITECTURE.md)
 - [Estratégia de avaliação](docs/EVALS.md)
+- [Protocolo de calibração do judge](docs/JUDGE_CALIBRATION.md)
 - [Política do corpus](corpus/README.md)
 
 ## Processo de desenvolvimento

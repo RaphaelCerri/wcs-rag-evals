@@ -58,6 +58,17 @@ O baseline extrativo passou nos gates estruturais e de operação, mas atingiu a
 
 Faithfulness semântica, answer relevance semântica e entailment entre claim e citação não são inferidos dessas proxies. Eles entram somente com o judge calibrado da Fase 6.
 
+### Judge semântico
+
+A Fase 6 usa um protocolo humano independente antes de aceitar qualquer métrica produzida por
+LLM. O piloto separa oito casos de calibração e cinco de validação, executa o judge três vezes por
+caso e mede concordância exata, Cohen's kappa, matriz de confusão e estabilidade. O prompt não
+recebe rótulos humanos nem a partição de calibração.
+
+A rubrica e os rótulos ficam em `evals/judges/`. O pacote com evidências é gerado em `reports/`,
+fora do Git para não republicar o corpus AGPL. O procedimento completo está em
+[`docs/JUDGE_CALIBRATION.md`](JUDGE_CALIBRATION.md).
+
 Resultados: [baseline extrativo](../evals/results/generation-v0.1.md) e [benchmark](../evals/results/generation-benchmark-v0.1.md).
 
 ### Operação
