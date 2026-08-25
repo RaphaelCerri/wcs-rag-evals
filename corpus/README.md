@@ -1,53 +1,39 @@
-# Política do corpus
+# Corpus policy
 
-## Escopo
+> **English** · [Português](README.pt-BR.md)
 
-O corpus cobre decisões e operações de um Warehouse Control System: fronteiras WMS/WCS/equipamento, movimentação física, inventory, allocation, cubing, slotting, replenishment, GTP, integração de host, segurança e scaling.
+## Scope
 
-Conteúdo de marketing, instruções para agentes do projeto-fonte, imagens, deployment e integrações proprietárias ficam fora da primeira versão.
+The corpus covers Warehouse Control System decisions and operations: WMS/WCS/equipment boundaries,
+physical movement, inventory, allocation, cubing, slotting, replenishment, GTP, host integration,
+security, and horizontal scaling.
 
-## Proveniência
+Marketing content, source-project agent instructions, images, deployment material, and proprietary
+integrations are excluded.
 
-Cada fonte possui:
+## Provenance
 
-- URL pública;
-- commit completo e imutável;
-- licença declarada;
-- nível de autoridade;
-- allowlist e denylist de caminhos.
+Every source records its public URL, immutable commit, declared license, authority level, and path
+allowlist or denylist. The collector derives `.data/corpus-manifest.json` with origin, path, commit,
+size, and SHA-256 for each document.
 
-O coletor produz `.data/corpus-manifest.json` com caminho, origem, commit, tamanho e SHA-256 de cada documento. Esse arquivo é derivado e pode ser recriado.
+## Evidence hierarchy
 
-## Hierarquia de evidência
+When sources disagree, the answer preserves the disagreement and uses this order:
 
-Quando documentos divergem, a resposta deve preservar a divergência e seguir esta ordem:
+1. `docs/AS-BUILT.md` for implemented behavior at the pinned revision;
+2. `docs/DEVELOPMENT-STATUS.md` for recently declared status;
+3. accepted ADR for an architectural decision;
+4. proposed ADR for intent not necessarily delivered;
+5. wiki for explanation and navigation;
+6. README for an aggregate overview.
 
-1. `docs/AS-BUILT.md` para o que está implementado na revisão fixada;
-2. `docs/DEVELOPMENT-STATUS.md` para estado recente declarado;
-3. ADR aceito para decisão arquitetural;
-4. ADR proposto para intenção ainda não necessariamente entregue;
-5. wiki para explicação e navegação;
-6. README para visão agregada.
+A proposal must never be presented as delivered behavior without qualifying the evidence.
 
-O sistema não deve combinar um ADR proposto com um documento as-built e apresentar a proposta como entregue sem qualificar a evidência.
+## License and updates
 
-## Licença
+openWCS declares AGPL-3.0. Raw content stays outside Git, the fetcher downloads directly from the
+pinned origin, reference answers are original paraphrases, and outputs retain source IDs.
 
-O openWCS declara AGPL-3.0. Para reduzir redistribuição desnecessária:
-
-- o corpus bruto fica fora do Git;
-- o script baixa a revisão diretamente da origem;
-- pequenos trechos não são copiados para o golden set;
-- respostas de referência são paráfrases produzidas para avaliação;
-- toda saída mantém source IDs e caminhos de origem.
-
-## Atualização
-
-Atualizar o corpus é uma mudança de dataset, não manutenção automática. Exige:
-
-1. alterar a revisão no manifesto;
-2. reconstruir e comparar hashes;
-3. revisar documentos adicionados, removidos ou modificados;
-4. revalidar o golden set;
-5. publicar métricas antes e depois.
-
+Changing the pinned revision is a dataset change. It requires rebuilding hashes, reviewing changed
+documents, revalidating the golden set, and publishing before-and-after metrics.
